@@ -18,6 +18,15 @@ public class EdgeControl {
     private Edge Edge;
     private ArrayList<Point> PseudoNodes;
 
+    EdgeControl(Edge E) {
+        this.Edge = E;
+    }
+
+    public EdgeControl(Edge Edge, ArrayList<Point> PseudoNodes) {
+        this.Edge = Edge;
+        this.PseudoNodes = PseudoNodes;
+    }
+    
     public ArrayList<Point> getPseudoNodes() {
         return PseudoNodes;
     }

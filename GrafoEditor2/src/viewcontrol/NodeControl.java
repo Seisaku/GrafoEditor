@@ -17,6 +17,17 @@ public class NodeControl {
     private Node Node;
     private Point Point;
 
+    NodeControl(Node N) {
+        this.Node = N;
+    }
+
+    public NodeControl(Node Node, Point Point) {
+        this.Node = Node;
+        this.Point = Point;
+    }
+    
+    
+
     public Point getPoint() {
         return Point;
     }
