@@ -40,6 +40,9 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopupMenu = new javax.swing.JPopupMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         CenterPanel = new javax.swing.JPanel();
         NorthPanel = new javax.swing.JPanel();
@@ -47,84 +50,101 @@ public class MainFrame extends javax.swing.JFrame {
         EastPanel = new javax.swing.JPanel();
         WestPanel = new javax.swing.JPanel();
 
+        jMenu1.setText("jMenu1");
+
+        jMenuItem1.setText("AAAA");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        PopupMenu.add(jMenu1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(600, 600));
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
 
         jLayeredPane1.setLayout(new java.awt.BorderLayout());
 
         CenterPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        CenterPanel.setPreferredSize(new java.awt.Dimension(100, 200));
 
         javax.swing.GroupLayout CenterPanelLayout = new javax.swing.GroupLayout(CenterPanel);
         CenterPanel.setLayout(CenterPanelLayout);
         CenterPanelLayout.setHorizontalGroup(
             CenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 586, Short.MAX_VALUE)
         );
         CenterPanelLayout.setVerticalGroup(
             CenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(CenterPanel, java.awt.BorderLayout.CENTER);
 
         NorthPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        NorthPanel.setPreferredSize(new java.awt.Dimension(780, 30));
 
         javax.swing.GroupLayout NorthPanelLayout = new javax.swing.GroupLayout(NorthPanel);
         NorthPanel.setLayout(NorthPanelLayout);
         NorthPanelLayout.setHorizontalGroup(
             NorthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 778, Short.MAX_VALUE)
+            .addGap(0, 886, Short.MAX_VALUE)
         );
         NorthPanelLayout.setVerticalGroup(
             NorthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 28, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(NorthPanel, java.awt.BorderLayout.NORTH);
 
         SouthPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SouthPanel.setPreferredSize(new java.awt.Dimension(888, 100));
 
         javax.swing.GroupLayout SouthPanelLayout = new javax.swing.GroupLayout(SouthPanel);
         SouthPanel.setLayout(SouthPanelLayout);
         SouthPanelLayout.setHorizontalGroup(
             SouthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 778, Short.MAX_VALUE)
+            .addGap(0, 886, Short.MAX_VALUE)
         );
         SouthPanelLayout.setVerticalGroup(
             SouthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 98, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(SouthPanel, java.awt.BorderLayout.SOUTH);
 
         EastPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        EastPanel.setPreferredSize(new java.awt.Dimension(150, 200));
 
         javax.swing.GroupLayout EastPanelLayout = new javax.swing.GroupLayout(EastPanel);
         EastPanel.setLayout(EastPanelLayout);
         EastPanelLayout.setHorizontalGroup(
             EastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 148, Short.MAX_VALUE)
         );
         EastPanelLayout.setVerticalGroup(
             EastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(EastPanel, java.awt.BorderLayout.EAST);
 
         WestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        WestPanel.setPreferredSize(new java.awt.Dimension(150, 200));
 
         javax.swing.GroupLayout WestPanelLayout = new javax.swing.GroupLayout(WestPanel);
         WestPanel.setLayout(WestPanelLayout);
         WestPanelLayout.setHorizontalGroup(
             WestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 148, Short.MAX_VALUE)
         );
         WestPanelLayout.setVerticalGroup(
             WestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(WestPanel, java.awt.BorderLayout.LINE_START);
@@ -133,6 +153,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,8 +197,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel CenterPanel;
     private javax.swing.JPanel EastPanel;
     private javax.swing.JPanel NorthPanel;
+    private javax.swing.JPopupMenu PopupMenu;
     private javax.swing.JPanel SouthPanel;
     private javax.swing.JPanel WestPanel;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

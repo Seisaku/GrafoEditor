@@ -13,6 +13,7 @@ import model.Graph;
 import model.Node;
 
 /**
+ * Classe que cuida da interface entre o modelo Grafo e a GUI
  *
  * @author Rafael
  */
@@ -21,6 +22,38 @@ public class GraphControl {
     private Graph Graph;
     private ArrayList<EdgeControl> EC;
     private ArrayList<NodeControl> NC;
+
+    public GraphControl() {
+        this.Graph = new Graph(null);
+        this.EC = new ArrayList<>();
+        this.NC = new ArrayList<>();        
+    }    
+    
+    /**
+     *
+     * @param i
+     * @return
+     */
+    public EdgeControl getEC(int i) {
+        return EC.get(i);
+    }
+
+    public int getECsize() {
+        return EC.size();
+    }
+
+    public int getNCsize() {
+        return NC.size();
+    }
+
+    /**
+     *
+     * @param i
+     * @return
+     */
+    public NodeControl getNC(int i) {
+        return NC.get(i);
+    }
 
     /**
      *
@@ -43,10 +76,10 @@ public class GraphControl {
      * @param n
      * @param P
      */
-    public void addNode(String n,Point P) {
+    public void addNode(String n, Point P) {
         Node N = new Node(n);
         this.Graph.addNode(N);
-        NC.add(new NodeControl(N,P));
+        NC.add(new NodeControl(N, P));
     }
 
     /**
@@ -63,21 +96,23 @@ public class GraphControl {
     }
 
     /**
-     *  Adiciona uma aresta ao grafo
+     * Adiciona uma aresta ao grafo
+     *
      * @param n nome da aresta
      * @param a primeiro nó em que a aresta incide
      * @param b segundo nó em que a aresta incide
      * @param w peso da aresta
      * @param pse lista de pontos auxiliares para desenho da aresta
      */
-    public void addEdge(String n, Node a, Node b, int w,ArrayList<Point> pse) {
+    public void addEdge(String n, Node a, Node b, int w, ArrayList<Point> pse) {
         Edge E = new Edge(n, a, b, w);
         this.Graph.addEdge(E);
-        EC.add(new EdgeControl(E,pse));
+        EC.add(new EdgeControl(E, pse));
     }
 
     /**
      * Função para retornar um NodeControl dado um Node
+     *
      * @param N, node a ter seu controler recuperado
      * @return controlerr do node
      */
@@ -93,7 +128,8 @@ public class GraphControl {
     }
 
     /**
-     *  Função para retornar um EdgeControl dado um Edge
+     * Função para retornar um EdgeControl dado um Edge
+     *
      * @param E, edge a ter seu controler recuperado
      * @return controler do edge
      */

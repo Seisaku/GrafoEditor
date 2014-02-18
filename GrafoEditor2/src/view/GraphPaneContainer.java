@@ -14,12 +14,12 @@ package view;
  *
  * @author Rafael
  */
-public class GraphPanel extends javax.swing.JPanel {
+public class GraphPaneContainer extends javax.swing.JPanel {
 
     /**
      * Creates new form GraphFrame
      */
-    public GraphPanel() {
+    public GraphPaneContainer() {
         initComponents();
     }
 
@@ -33,13 +33,33 @@ public class GraphPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         TabsPane = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
 
+        setMinimumSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(300, 300));
         setLayout(new java.awt.BorderLayout());
+
+        TabsPane.setName(""); // NOI18N
+
+        jScrollPane1.setAutoscrolls(true);
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 1000));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 1000));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jScrollPane1.setViewportView(jPanel1);
+
+        TabsPane.addTab("Grafo", jScrollPane1);
+        jScrollPane1.getAccessibleContext().setAccessibleDescription("");
+
         add(TabsPane, java.awt.BorderLayout.CENTER);
+        TabsPane.getAccessibleContext().setAccessibleName("Tabs");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabsPane;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

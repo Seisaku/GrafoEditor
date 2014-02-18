@@ -17,9 +17,26 @@ import model.Edge;
 public class EdgeControl {
     private Edge Edge;
     private ArrayList<Point> PseudoNodes;
+    private NodeControl A,B;
 
     EdgeControl(Edge E) {
         this.Edge = E;
+    }
+
+    public NodeControl getA() {
+        return A;
+    }
+
+    public void setA(NodeControl A) {
+        this.A = A;
+    }
+
+    public NodeControl getB() {
+        return B;
+    }
+
+    public void setB(NodeControl B) {
+        this.B = B;
     }
 
     public EdgeControl(Edge Edge, ArrayList<Point> PseudoNodes) {
