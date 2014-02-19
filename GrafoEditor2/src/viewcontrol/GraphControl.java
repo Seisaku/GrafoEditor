@@ -24,11 +24,12 @@ public class GraphControl {
     private ArrayList<NodeControl> NC;
 
     public GraphControl() {
+        this.mode = mode.sel;
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
-        this.NC = new ArrayList<>();        
-    }    
-    
+        this.NC = new ArrayList<>();
+    }
+
     /**
      *
      * @param i
@@ -143,4 +144,52 @@ public class GraphControl {
         }
         return null;
     }
+
+    public void GCnotify(Node N) {
+        switch (mode) {
+            case remNode:
+                break;
+            case sel:
+                break;
+
+        }
+
+    }
+
+    public void GCnotify(Edge E) {
+        switch (mode) {
+            case remEdge:
+                break;
+            case sel:
+                break;
+
+        }
+    }
+
+    public void GCnotify(Point P) {
+        switch (mode) {
+            case addNode:
+                break;
+        }
+    }
+    
+    public ItemControl searchPoint(Point P){
+        for (EdgeControl edgeControl : EC) {
+            edgeControl.getA();
+            edgeControl.getB();
+        }
+        for (NodeControl nodeControl : NC) {
+            if(P.distance(nodeControl.getPoint())<5) {
+                return nodeControl;
+            }
+        }
+        return null;
+    }
+
+    private mode mode;
+
+    private enum mode {
+
+        addNode, addEdge, remNode, remEdge, sel
+    };
 }

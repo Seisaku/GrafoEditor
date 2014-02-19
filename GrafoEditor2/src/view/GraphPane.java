@@ -53,7 +53,7 @@ public class GraphPane extends javax.swing.JPanel {
         try {
             BI = ImageIO.read(new URL("resource//Node.png"));
         } catch (IOException ex) {
-            Logger.getLogger(GraphPane2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GraphPane.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -78,6 +78,11 @@ public class GraphPane extends javax.swing.JPanel {
                 formMouseClicked(evt);
             }
         });
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,6 +100,10 @@ public class GraphPane extends javax.swing.JPanel {
         this.GC.addNode("",evt.getPoint());
        
     }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+      this.GC.searchPoint(evt.getPoint());
+    }//GEN-LAST:event_formMouseMoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

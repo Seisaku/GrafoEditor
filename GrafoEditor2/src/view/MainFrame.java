@@ -46,9 +46,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         CenterPanel = new javax.swing.JPanel();
         NorthPanel = new javax.swing.JPanel();
+        toolPanel1 = new view.ToolPanel();
         SouthPanel = new javax.swing.JPanel();
         EastPanel = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        propertiesPanel1 = new view.PropertiesPanel();
+        navPanel1 = new view.NavPanel();
         WestPanel = new javax.swing.JPanel();
+        matrixPanel1 = new view.MatrixPanel();
 
         jMenu1.setText("jMenu1");
 
@@ -71,81 +76,40 @@ public class MainFrame extends javax.swing.JFrame {
 
         CenterPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CenterPanel.setPreferredSize(new java.awt.Dimension(100, 200));
-
-        javax.swing.GroupLayout CenterPanelLayout = new javax.swing.GroupLayout(CenterPanel);
-        CenterPanel.setLayout(CenterPanelLayout);
-        CenterPanelLayout.setHorizontalGroup(
-            CenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
-        );
-        CenterPanelLayout.setVerticalGroup(
-            CenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
-        );
-
+        CenterPanel.setLayout(new java.awt.BorderLayout());
         jLayeredPane1.add(CenterPanel, java.awt.BorderLayout.CENTER);
 
         NorthPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        NorthPanel.setPreferredSize(new java.awt.Dimension(780, 30));
-
-        javax.swing.GroupLayout NorthPanelLayout = new javax.swing.GroupLayout(NorthPanel);
-        NorthPanel.setLayout(NorthPanelLayout);
-        NorthPanelLayout.setHorizontalGroup(
-            NorthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 886, Short.MAX_VALUE)
-        );
-        NorthPanelLayout.setVerticalGroup(
-            NorthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
-        );
+        NorthPanel.setMinimumSize(new java.awt.Dimension(322, 40));
+        NorthPanel.setPreferredSize(new java.awt.Dimension(780, 40));
+        NorthPanel.setLayout(new java.awt.BorderLayout());
+        NorthPanel.add(toolPanel1, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(NorthPanel, java.awt.BorderLayout.NORTH);
 
         SouthPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        SouthPanel.setPreferredSize(new java.awt.Dimension(888, 100));
-
-        javax.swing.GroupLayout SouthPanelLayout = new javax.swing.GroupLayout(SouthPanel);
-        SouthPanel.setLayout(SouthPanelLayout);
-        SouthPanelLayout.setHorizontalGroup(
-            SouthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 886, Short.MAX_VALUE)
-        );
-        SouthPanelLayout.setVerticalGroup(
-            SouthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
-        );
-
+        SouthPanel.setMinimumSize(new java.awt.Dimension(2, 40));
+        SouthPanel.setPreferredSize(new java.awt.Dimension(888, 40));
+        SouthPanel.setLayout(new java.awt.BorderLayout());
         jLayeredPane1.add(SouthPanel, java.awt.BorderLayout.SOUTH);
 
         EastPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EastPanel.setPreferredSize(new java.awt.Dimension(150, 200));
+        EastPanel.setLayout(new javax.swing.BoxLayout(EastPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout EastPanelLayout = new javax.swing.GroupLayout(EastPanel);
-        EastPanel.setLayout(EastPanelLayout);
-        EastPanelLayout.setHorizontalGroup(
-            EastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        EastPanelLayout.setVerticalGroup(
-            EastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
-        );
+        jSplitPane1.setDividerLocation(150);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setRightComponent(propertiesPanel1);
+        jSplitPane1.setLeftComponent(navPanel1);
+
+        EastPanel.add(jSplitPane1);
 
         jLayeredPane1.add(EastPanel, java.awt.BorderLayout.EAST);
 
         WestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         WestPanel.setPreferredSize(new java.awt.Dimension(150, 200));
-
-        javax.swing.GroupLayout WestPanelLayout = new javax.swing.GroupLayout(WestPanel);
-        WestPanel.setLayout(WestPanelLayout);
-        WestPanelLayout.setHorizontalGroup(
-            WestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
-        );
-        WestPanelLayout.setVerticalGroup(
-            WestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
-        );
+        WestPanel.setLayout(new java.awt.BorderLayout());
+        WestPanel.add(matrixPanel1, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(WestPanel, java.awt.BorderLayout.LINE_START);
 
@@ -203,5 +167,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JSplitPane jSplitPane1;
+    private view.MatrixPanel matrixPanel1;
+    private view.NavPanel navPanel1;
+    private view.PropertiesPanel propertiesPanel1;
+    private view.ToolPanel toolPanel1;
     // End of variables declaration//GEN-END:variables
 }

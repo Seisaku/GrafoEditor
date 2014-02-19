@@ -32,20 +32,52 @@ public class ToolPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButton1.setText("jButton1");
+        jButton1.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton1.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton1.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton1);
 
-        jButton2.setText("jButton2");
+        jButton2.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton2.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton2.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton2);
 
-        jButton3.setText("jButton3");
+        jButton3.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton3.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton3.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton3);
 
-        jButton4.setText("jButton4");
+        jButton4.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton4.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton4.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton4);
+
+        jButton5.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton5.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton5.setPreferredSize(new java.awt.Dimension(40, 40));
+        add(jButton5);
+
+        jButton6.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton6.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton6.setPreferredSize(new java.awt.Dimension(40, 40));
+        add(jButton6);
+
+        jButton7.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton7.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton7.setPreferredSize(new java.awt.Dimension(40, 40));
+        add(jButton7);
+
+        jButton8.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton8.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton8.setPreferredSize(new java.awt.Dimension(40, 40));
+        add(jButton8);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -54,5 +86,9 @@ public class ToolPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     // End of variables declaration//GEN-END:variables
 }

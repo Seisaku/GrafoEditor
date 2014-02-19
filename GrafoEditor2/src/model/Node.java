@@ -25,7 +25,7 @@ import java.util.ArrayList;
  *
  * @author Rafael
  */
-public class Node {
+public class Node implements GraphItem{
 
     private ArrayList<Edge> Edges;
     private String Name;

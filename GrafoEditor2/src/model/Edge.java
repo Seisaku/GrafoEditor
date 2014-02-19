@@ -21,7 +21,7 @@ package model;
  *
  * @author Rafael
  */
-public class Edge {
+public class Edge implements GraphItem{
 
     private Node A, B;
     private int Weight;

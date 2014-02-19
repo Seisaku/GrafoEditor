@@ -13,7 +13,7 @@ import model.Node;
  *
  * @author Rafael
  */
-public class NodeControl {
+public class NodeControl extends ItemControl{
     private Node Node;
     private Point Point;
 
@@ -43,6 +43,6 @@ public class NodeControl {
     public void setNode(Node Node) {
         this.Node = Node;
     }
-    
+
     
 }

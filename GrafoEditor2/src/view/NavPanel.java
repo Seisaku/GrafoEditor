@@ -28,19 +28,33 @@ public class NavPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+
+        setLayout(new java.awt.BorderLayout());
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Grafo");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Node");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("N1");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("N2");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Edge");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("E1");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("E2");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jTree1);
+
+        add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }

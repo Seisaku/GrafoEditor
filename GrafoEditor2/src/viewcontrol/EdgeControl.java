@@ -14,7 +14,7 @@ import model.Edge;
  *
  * @author Rafael
  */
-public class EdgeControl {
+public class EdgeControl extends ItemControl {
     private Edge Edge;
     private ArrayList<Point> PseudoNodes;
     private NodeControl A,B;
@@ -58,6 +58,11 @@ public class EdgeControl {
 
     public void setEdge(Edge Edge) {
         this.Edge = Edge;
+    }
+
+    
+    public void select() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
