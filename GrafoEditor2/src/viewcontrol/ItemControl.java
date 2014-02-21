@@ -24,5 +24,7 @@ public abstract class ItemControl {
         this.selected = selected;
     }
     
+    public abstract void remove();
+    
     
 }

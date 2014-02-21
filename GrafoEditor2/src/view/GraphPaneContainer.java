@@ -16,11 +16,27 @@ package view;
  */
 public class GraphPaneContainer extends javax.swing.JPanel {
 
+    public GraphPane getGP() {
+        return GP;
+    }
+
+    public void setGP(GraphPane GP) {
+        this.GP = GP;
+    }
+
     /**
      * Creates new form GraphFrame
      */
     public GraphPaneContainer() {
-        initComponents();
+        initComponents();        
+    }
+
+    public GraphPane getGraphPane() {
+        return GP;
+    }
+
+    public void setGraphPane(GraphPane graphPane) {
+        this.GP = graphPane;
     }
 
     /**
@@ -35,6 +51,7 @@ public class GraphPaneContainer extends javax.swing.JPanel {
         TabsPane = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        GP = new view.GraphPane();
 
         setMinimumSize(new java.awt.Dimension(300, 300));
         setPreferredSize(new java.awt.Dimension(300, 300));
@@ -46,7 +63,21 @@ public class GraphPaneContainer extends javax.swing.JPanel {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 1000));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout GPLayout = new javax.swing.GroupLayout(GP);
+        GP.setLayout(GPLayout);
+        GPLayout.setHorizontalGroup(
+            GPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 515, Short.MAX_VALUE)
+        );
+        GPLayout.setVerticalGroup(
+            GPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(GP, java.awt.BorderLayout.CENTER);
+
         jScrollPane1.setViewportView(jPanel1);
 
         TabsPane.addTab("Grafo", jScrollPane1);
@@ -58,6 +89,7 @@ public class GraphPaneContainer extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.GraphPane GP;
     private javax.swing.JTabbedPane TabsPane;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

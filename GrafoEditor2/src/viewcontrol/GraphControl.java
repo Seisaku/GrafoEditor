@@ -22,12 +22,22 @@ public class GraphControl {
     private Graph Graph;
     private ArrayList<EdgeControl> EC;
     private ArrayList<NodeControl> NC;
+    private mode mode;
+    private ItemControl selected;
 
     public GraphControl() {
         this.mode = mode.sel;
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
         this.NC = new ArrayList<>();
+    }
+
+    public mode getMode() {
+        return mode;
+    }
+
+    public void setMode(mode mode) {
+        this.mode = mode;
     }
 
     /**
@@ -145,22 +155,34 @@ public class GraphControl {
         return null;
     }
 
-    public void GCnotify(Node N) {
+    public void GCnotify(NodeControl N) {
         switch (mode) {
             case remNode:
+                this.removeNode(N);
                 break;
             case sel:
+                this.selected = N;
                 break;
 
         }
 
     }
 
-    public void GCnotify(Edge E) {
+    public void GCnotify(ItemControl I) {
+        if (I.getClass() != EdgeControl.class) {
+            this.GCnotify((EdgeControl) I);
+        } else {
+            this.GCnotify((NodeControl) I);
+        }
+    }
+
+    public void GCnotify(EdgeControl E) {
         switch (mode) {
             case remEdge:
+                this.removeEdge(E);
                 break;
             case sel:
+                this.selected = E;
                 break;
 
         }
@@ -169,27 +191,41 @@ public class GraphControl {
     public void GCnotify(Point P) {
         switch (mode) {
             case addNode:
+                this.addNode(P);
                 break;
         }
     }
-    
-    public ItemControl searchPoint(Point P){
+
+    public ItemControl searchPoint(Point P) {
         for (EdgeControl edgeControl : EC) {
             edgeControl.getA();
             edgeControl.getB();
         }
         for (NodeControl nodeControl : NC) {
-            if(P.distance(nodeControl.getPoint())<5) {
+            if (P.distance(nodeControl.getPoint()) < 5) {
                 return nodeControl;
             }
         }
         return null;
     }
 
-    private mode mode;
+    private void removeNode(NodeControl N) {
+        N.remove();
+        Node node = N.getNode();
+        ArrayList<Edge> ER = node.getEdges();
+        for (Edge edge : ER) {
+            this.Graph.removeEdge(edge);
+        }
+        this.Graph.removeNode(node);
+    }
 
-    private enum mode {
+    private void removeEdge(EdgeControl E) {
+        this.Graph.removeEdge(E.getEdge());
+    }
 
-        addNode, addEdge, remNode, remEdge, sel
-    };
+    private void addNode(Point P) {
+        Node N = new Node("");
+        this.Graph.addNode(N);
+        NC.add(new NodeControl(N, P));
+    }
 }

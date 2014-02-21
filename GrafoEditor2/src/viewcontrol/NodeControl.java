@@ -17,6 +17,8 @@ public class NodeControl extends ItemControl{
     private Node Node;
     private Point Point;
 
+    
+    
     NodeControl(Node N) {
         this.Node = N;
     }
@@ -42,6 +44,11 @@ public class NodeControl extends ItemControl{
 
     public void setNode(Node Node) {
         this.Node = Node;
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

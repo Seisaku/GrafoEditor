@@ -6,12 +6,22 @@
 
 package view;
 
+import viewcontrol.mode;
+
 /**
  *
  * @author Rafael
  */
 public class ToolPanel extends javax.swing.JPanel {
+    private MainFrame MF;
 
+    public MainFrame getMF() {
+        return MF;
+    }
+
+    public void setMF(MainFrame MF) {
+        this.MF = MF;
+    }    
     /**
      * Creates new form ToolPanel
      */
@@ -28,9 +38,9 @@ public class ToolPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        AddNode = new javax.swing.JButton();
+        AddEdge = new javax.swing.JButton();
+        Remove = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -39,20 +49,32 @@ public class ToolPanel extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButton1.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton1.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton1.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton1);
+        AddNode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
+        AddNode.setMaximumSize(new java.awt.Dimension(40, 40));
+        AddNode.setMinimumSize(new java.awt.Dimension(40, 40));
+        AddNode.setPreferredSize(new java.awt.Dimension(40, 40));
+        AddNode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddNodeActionPerformed(evt);
+            }
+        });
+        add(AddNode);
 
-        jButton2.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton2.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton2.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton2);
+        AddEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
+        AddEdge.setMaximumSize(new java.awt.Dimension(40, 40));
+        AddEdge.setMinimumSize(new java.awt.Dimension(40, 40));
+        AddEdge.setPreferredSize(new java.awt.Dimension(40, 40));
+        AddEdge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEdgeActionPerformed(evt);
+            }
+        });
+        add(AddEdge);
 
-        jButton3.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton3.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton3.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton3);
+        Remove.setMaximumSize(new java.awt.Dimension(40, 40));
+        Remove.setMinimumSize(new java.awt.Dimension(40, 40));
+        Remove.setPreferredSize(new java.awt.Dimension(40, 40));
+        add(Remove);
 
         jButton4.setMaximumSize(new java.awt.Dimension(40, 40));
         jButton4.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -80,11 +102,19 @@ public class ToolPanel extends javax.swing.JPanel {
         add(jButton8);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AddNodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNodeActionPerformed
+        this.MF.getGC().setMode(mode.addNode);
+    }//GEN-LAST:event_AddNodeActionPerformed
+
+    private void AddEdgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEdgeActionPerformed
+        this.MF.getGC().setMode(mode.addEdge);
+    }//GEN-LAST:event_AddEdgeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton AddEdge;
+    private javax.swing.JButton AddNode;
+    private javax.swing.JButton Remove;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

@@ -11,7 +11,15 @@ package view;
  * @author Rafael
  */
 public class NavPanel extends javax.swing.JPanel {
+    private MainFrame MF;
 
+    public MainFrame getMF() {
+        return MF;
+    }
+
+    public void setMF(MainFrame MF) {
+        this.MF = MF;
+    }    
     /**
      * Creates new form NavPanel
      */

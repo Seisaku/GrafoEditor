@@ -18,17 +18,33 @@
 
 package view;
 
+import viewcontrol.GraphControl;
+
 /**
  *
  * @author Rafael
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    private GraphControl GC;
+
+    public GraphControl getGC() {
+        return GC;
+    }
+
+    public void setGC(GraphControl GC) {
+        this.GC = GC;
+    }        
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        this.setVisible(true);
+        this.GC = new GraphControl();
+        this.graphPaneContainer1.getGP().setGC(this.GC);
+        this.toolPanel1.setMF(this);
     }
 
     /**
@@ -45,6 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         CenterPanel = new javax.swing.JPanel();
+        graphPaneContainer1 = new view.GraphPaneContainer();
         NorthPanel = new javax.swing.JPanel();
         toolPanel1 = new view.ToolPanel();
         SouthPanel = new javax.swing.JPanel();
@@ -77,6 +94,8 @@ public class MainFrame extends javax.swing.JFrame {
         CenterPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CenterPanel.setPreferredSize(new java.awt.Dimension(100, 200));
         CenterPanel.setLayout(new java.awt.BorderLayout());
+        CenterPanel.add(graphPaneContainer1, java.awt.BorderLayout.CENTER);
+
         jLayeredPane1.add(CenterPanel, java.awt.BorderLayout.CENTER);
 
         NorthPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -164,6 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu PopupMenu;
     private javax.swing.JPanel SouthPanel;
     private javax.swing.JPanel WestPanel;
+    private view.GraphPaneContainer graphPaneContainer1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
