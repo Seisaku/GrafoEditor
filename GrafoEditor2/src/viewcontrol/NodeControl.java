@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package viewcontrol;
 
 import java.awt.Point;
@@ -13,12 +12,20 @@ import model.Node;
  *
  * @author Rafael
  */
-public class NodeControl extends ItemControl{
+public class NodeControl extends ItemControl {
+
     private Node Node;
     private Point Point;
+    private GraphControl GC;
 
-    
-    
+    public GraphControl getGC() {
+        return GC;
+    }
+
+    public void setGC(GraphControl GC) {
+        this.GC = GC;
+    }
+
     NodeControl(Node N) {
         this.Node = N;
     }
@@ -27,8 +34,6 @@ public class NodeControl extends ItemControl{
         this.Node = Node;
         this.Point = Point;
     }
-    
-    
 
     public Point getPoint() {
         return Point;
@@ -51,5 +56,4 @@ public class NodeControl extends ItemControl{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

@@ -18,6 +18,17 @@ public class EdgeControl extends ItemControl {
     private Edge Edge;
     private ArrayList<Point> PseudoNodes;
     private NodeControl A,B;
+    private GraphControl GC;
+
+    public GraphControl getGC() {
+        return GC;
+    }
+
+    public void setGC(GraphControl GC) {
+        this.GC = GC;
+    }
+    
+    
 
     EdgeControl(Edge E) {
         this.Edge = E;

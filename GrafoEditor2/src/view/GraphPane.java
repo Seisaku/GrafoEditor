@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -52,6 +53,7 @@ public class GraphPane extends javax.swing.JPanel {
             EdgeControl ec;
             NodeControl nc;
             Point A, B;
+            g.setColor(Color.black);
             for (int i = 0; i < GC.getECsize(); i++) {
                 ec = this.GC.getEC(i);
                 A = ec.getA().getPoint();
@@ -60,8 +62,8 @@ public class GraphPane extends javax.swing.JPanel {
             }
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
-                g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-                g.drawImage(BI, nc.getPoint().x, nc.getPoint().y, this);
+                //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
+                g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
             }
         }
     }
@@ -74,7 +76,7 @@ public class GraphPane extends javax.swing.JPanel {
 //            Graphics2D g = newImage.createGraphics();
 //            g.drawImage(in, 0, 0, null);
 //            g.dispose();
-            
+
             BI = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node.png"));
             //BI = ImageIO.read(getClass().getResource("resource/Node.png"));
         } catch (IOException ex) {
@@ -126,11 +128,13 @@ public class GraphPane extends javax.swing.JPanel {
             this.GC.GCnotify(Hightlighted);
         }
         this.GC.GCnotify(evt.getPoint());
+        this.repaint();
 
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         this.Hightlighted = this.GC.searchPoint(evt.getPoint());
+        this.repaint();
     }//GEN-LAST:event_formMouseMoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
