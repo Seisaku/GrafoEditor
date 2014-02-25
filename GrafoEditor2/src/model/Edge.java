@@ -92,4 +92,11 @@ public class Edge implements GraphItem{
         B = temp;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
 }

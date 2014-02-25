@@ -30,8 +30,11 @@ public class EdgeControl extends ItemControl {
     
     
 
-    EdgeControl(Edge E) {
+    EdgeControl(Edge E,NodeControl A,NodeControl B) {
         this.Edge = E;
+//TODO new edgecontrol        
+    this.A = A;
+    this.B = B;
     }
 
     public NodeControl getA() {
