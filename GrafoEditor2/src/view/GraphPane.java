@@ -24,7 +24,7 @@ import viewcontrol.NodeControl;
 public class GraphPane extends javax.swing.JPanel {
 
     private GraphControl GC;
-    private BufferedImage BI;
+    private BufferedImage BI,BI2;
     private ItemControl Hightlighted;
 
     public GraphControl getGC() {
@@ -46,6 +46,10 @@ public class GraphPane extends javax.swing.JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        NodeControl hl = null;
+        if (this.Hightlighted != null) {
+            hl = (NodeControl) Hightlighted;
+        }
         if (this.GC != null) {
             if (BI == null) {
                 this.startBI();
@@ -63,22 +67,26 @@ public class GraphPane extends javax.swing.JPanel {
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-                g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                if (hl == nc) {
+                    g.drawImage(BI2, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                } else {
+                    g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                }
             }
         }
     }
 
     public void startBI() {
-        try {
+
 //            File img = new File("imagen.png");
 //            BufferedImage in = ImageIO.read(img);
 //            BufferedImage newImage = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
 //            Graphics2D g = newImage.createGraphics();
 //            g.drawImage(in, 0, 0, null);
 //            g.dispose();
-
+        try {
             BI = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node.png"));
-            //BI = ImageIO.read(getClass().getResource("resource/Node.png"));
+        BI2 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\NodeSelected.png"));
         } catch (IOException ex) {
             System.out.println("ERRO AO LER IMAGEM NODE");
         }
@@ -101,11 +109,17 @@ public class GraphPane extends javax.swing.JPanel {
     private void initComponents() {
 
         addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
             }
@@ -136,6 +150,18 @@ public class GraphPane extends javax.swing.JPanel {
         this.Hightlighted = this.GC.searchPoint(evt.getPoint());
         this.repaint();
     }//GEN-LAST:event_formMouseMoved
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        if (this.Hightlighted != null) {
+            NodeControl nc = (NodeControl) this.Hightlighted;
+            nc.setPoint(evt.getPoint());
+            this.repaint();
+        }
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
