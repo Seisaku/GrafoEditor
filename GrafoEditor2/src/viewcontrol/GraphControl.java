@@ -6,6 +6,7 @@
 package viewcontrol;
 
 import java.awt.Point;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import model.Edge;
@@ -115,7 +116,6 @@ public class GraphControl {
 //        this.Graph.addEdge(E);
 //        EC.add(new EdgeControl(E));
 //    }
-
     /**
      * Adiciona uma aresta ao grafo
      *
@@ -221,15 +221,28 @@ public class GraphControl {
     }
 
     public ItemControl searchPoint(Point P) {
-        for (EdgeControl edgeControl : EC) {
-            edgeControl.getA();
-            edgeControl.getB();
-        }
         for (NodeControl nodeControl : NC) {
             if (P.distance(nodeControl.getPoint()) < 25) {
 //                System.out.println(nodeControl.getNode().getName() + " encontrado..");
                 return nodeControl;
             }
+            Line2D Line;
+            for (EdgeControl edgeControl : EC) {
+                Point A = edgeControl.getA().getPoint(), B = edgeControl.getB().getPoint();
+                int xinf = A.x < B.x ? A.x : B.x;
+                int yinf = A.y < B.y ? A.y : B.y;
+                int xsup = A.x > B.x ? A.x : B.x;
+                int ysup = A.y > B.y ? A.y : B.y;
+                Line = new Line2D.Double(A, B);
+                for (EdgeControl ec : EC) {
+                    if (Line.ptLineDist(P) < 5) {
+                        if (P.x > xinf && P.x < xsup && P.y > yinf && P.y < ysup) {
+                            return ec;
+                        }
+                    }
+                }
+            }
+
         }
         return null;
     }
@@ -254,7 +267,7 @@ public class GraphControl {
     private void addEdgeControl(GraphControl GC, NodeControl nc1, NodeControl nc2) {
         Edge E = new Edge("e" + this.EC.size() + 1, nc1.getNode(), nc2.getNode(), 0);
         this.Graph.addEdge(E);
-        EC.add(new EdgeControl(E,nc1,nc2));
+        EC.add(new EdgeControl(E, nc1, nc2));
 //        System.out.println("Vertice adicionado: " + E.getName());
         this.selected = null;
         this.mode = mode.sel;

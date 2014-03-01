@@ -24,7 +24,7 @@ import viewcontrol.NodeControl;
 public class GraphPane extends javax.swing.JPanel {
 
     private GraphControl GC;
-    private BufferedImage BI,BI2;
+    private BufferedImage BI, BI2;
     private ItemControl Hightlighted;
 
     public GraphControl getGC() {
@@ -46,9 +46,16 @@ public class GraphPane extends javax.swing.JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        NodeControl hl = null;
+        NodeControl nhl = null;
+        EdgeControl ehl = null;
+        //&& (this.Hightlighted.class==NodeControl.class)
         if (this.Hightlighted != null) {
-            hl = (NodeControl) Hightlighted;
+            if (this.Hightlighted.getClass() == NodeControl.class) {
+                nhl = (NodeControl) Hightlighted;
+            } else {
+                ehl = (EdgeControl) Hightlighted;
+            }
+
         }
         if (this.GC != null) {
             if (BI == null) {
@@ -62,12 +69,16 @@ public class GraphPane extends javax.swing.JPanel {
                 ec = this.GC.getEC(i);
                 A = ec.getA().getPoint();
                 B = ec.getB().getPoint();
+                if (ehl == ec) {
+                    g.setColor(Color.red);
+                }
                 g.drawLine(A.x, A.y, B.x, B.y);
+                g.setColor(Color.black);
             }
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-                if (hl == nc) {
+                if (nhl == nc) {
                     g.drawImage(BI2, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
                 } else {
                     g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
@@ -77,16 +88,9 @@ public class GraphPane extends javax.swing.JPanel {
     }
 
     public void startBI() {
-
-//            File img = new File("imagen.png");
-//            BufferedImage in = ImageIO.read(img);
-//            BufferedImage newImage = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//            Graphics2D g = newImage.createGraphics();
-//            g.drawImage(in, 0, 0, null);
-//            g.dispose();
         try {
             BI = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node.png"));
-        BI2 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\NodeSelected.png"));
+            BI2 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\NodeSelected.png"));
         } catch (IOException ex) {
             System.out.println("ERRO AO LER IMAGEM NODE");
         }
@@ -152,7 +156,7 @@ public class GraphPane extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        if (this.Hightlighted != null) {
+        if (this.Hightlighted != null && this.Hightlighted.getClass()==NodeControl.class) {
             NodeControl nc = (NodeControl) this.Hightlighted;
             nc.setPoint(evt.getPoint());
             this.repaint();

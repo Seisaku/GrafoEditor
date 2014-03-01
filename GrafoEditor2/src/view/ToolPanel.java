@@ -22,6 +22,11 @@ public class ToolPanel extends javax.swing.JPanel {
     public void setMF(MainFrame MF) {
         this.MF = MF;
     }    
+    
+    public void resetButtom(){
+        this.jToggleButton1.setSelected(false);
+        this.jToggleButton2.setSelected(false);
+    }
     /**
      * Creates new form ToolPanel
      */
@@ -38,38 +43,40 @@ public class ToolPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AddNode = new javax.swing.JButton();
-        AddEdge = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
         Remove = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        AddNode = new javax.swing.JButton();
+        AddEdge = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        AddNode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
-        AddNode.setMaximumSize(new java.awt.Dimension(40, 40));
-        AddNode.setMinimumSize(new java.awt.Dimension(40, 40));
-        AddNode.setPreferredSize(new java.awt.Dimension(40, 40));
-        AddNode.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
+        jToggleButton1.setMaximumSize(new java.awt.Dimension(40, 40));
+        jToggleButton1.setMinimumSize(new java.awt.Dimension(40, 40));
+        jToggleButton1.setPreferredSize(new java.awt.Dimension(40, 40));
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddNodeActionPerformed(evt);
+                jToggleButton1ActionPerformed(evt);
             }
         });
-        add(AddNode);
+        add(jToggleButton1);
 
-        AddEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
-        AddEdge.setMaximumSize(new java.awt.Dimension(40, 40));
-        AddEdge.setMinimumSize(new java.awt.Dimension(40, 40));
-        AddEdge.setPreferredSize(new java.awt.Dimension(40, 40));
-        AddEdge.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
+        jToggleButton2.setMaximumSize(new java.awt.Dimension(40, 40));
+        jToggleButton2.setMinimumSize(new java.awt.Dimension(40, 40));
+        jToggleButton2.setPreferredSize(new java.awt.Dimension(40, 40));
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddEdgeActionPerformed(evt);
+                jToggleButton2ActionPerformed(evt);
             }
         });
-        add(AddEdge);
+        add(jToggleButton2);
 
         Remove.setMaximumSize(new java.awt.Dimension(40, 40));
         Remove.setMinimumSize(new java.awt.Dimension(40, 40));
@@ -100,6 +107,28 @@ public class ToolPanel extends javax.swing.JPanel {
         jButton8.setMinimumSize(new java.awt.Dimension(40, 40));
         jButton8.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton8);
+
+        AddNode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
+        AddNode.setMaximumSize(new java.awt.Dimension(40, 40));
+        AddNode.setMinimumSize(new java.awt.Dimension(40, 40));
+        AddNode.setPreferredSize(new java.awt.Dimension(40, 40));
+        AddNode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddNodeActionPerformed(evt);
+            }
+        });
+        add(AddNode);
+
+        AddEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
+        AddEdge.setMaximumSize(new java.awt.Dimension(40, 40));
+        AddEdge.setMinimumSize(new java.awt.Dimension(40, 40));
+        AddEdge.setPreferredSize(new java.awt.Dimension(40, 40));
+        AddEdge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEdgeActionPerformed(evt);
+            }
+        });
+        add(AddEdge);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddNodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNodeActionPerformed
@@ -109,6 +138,14 @@ public class ToolPanel extends javax.swing.JPanel {
     private void AddEdgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEdgeActionPerformed
         this.MF.getGC().setMode(mode.addEdge);
     }//GEN-LAST:event_AddEdgeActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        this.MF.getGC().setMode(mode.addNode);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        this.MF.getGC().setMode(mode.addEdge);
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -120,5 +157,7 @@ public class ToolPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
