@@ -51,8 +51,6 @@ public class ToolPanel extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        AddNode = new javax.swing.JButton();
-        AddEdge = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -107,37 +105,7 @@ public class ToolPanel extends javax.swing.JPanel {
         jButton8.setMinimumSize(new java.awt.Dimension(40, 40));
         jButton8.setPreferredSize(new java.awt.Dimension(40, 40));
         add(jButton8);
-
-        AddNode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
-        AddNode.setMaximumSize(new java.awt.Dimension(40, 40));
-        AddNode.setMinimumSize(new java.awt.Dimension(40, 40));
-        AddNode.setPreferredSize(new java.awt.Dimension(40, 40));
-        AddNode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddNodeActionPerformed(evt);
-            }
-        });
-        add(AddNode);
-
-        AddEdge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
-        AddEdge.setMaximumSize(new java.awt.Dimension(40, 40));
-        AddEdge.setMinimumSize(new java.awt.Dimension(40, 40));
-        AddEdge.setPreferredSize(new java.awt.Dimension(40, 40));
-        AddEdge.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddEdgeActionPerformed(evt);
-            }
-        });
-        add(AddEdge);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void AddNodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNodeActionPerformed
-        this.MF.getGC().setMode(mode.addNode);
-    }//GEN-LAST:event_AddNodeActionPerformed
-
-    private void AddEdgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEdgeActionPerformed
-        this.MF.getGC().setMode(mode.addEdge);
-    }//GEN-LAST:event_AddEdgeActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         this.MF.getGC().setMode(mode.addNode);
@@ -149,8 +117,6 @@ public class ToolPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddEdge;
-    private javax.swing.JButton AddNode;
     private javax.swing.JButton Remove;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

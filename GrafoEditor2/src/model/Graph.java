@@ -6,8 +6,6 @@
 package model;
 
 import java.util.ArrayList;
-import viewcontrol.EdgeControl;
-import viewcontrol.NodeControl;
 
 /**
  *
@@ -67,12 +65,12 @@ public class Graph {
 
     public void addNode(Node N) {
         this.Nodes.add(N);
-        System.out.println("add Node");
+//        System.out.println("add Node");
     }
 
     public void addEdge(Edge E) {
         this.Edges.add(E);
-        System.out.println("add Edge");
+//        System.out.println("add Edge");
     }
 
     public void remove(Edge edge) {

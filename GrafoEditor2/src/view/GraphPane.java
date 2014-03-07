@@ -16,6 +16,7 @@ import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
 import viewcontrol.ItemControl;
 import viewcontrol.NodeControl;
+import viewcontrol.mode;
 
 /**
  *
@@ -24,8 +25,9 @@ import viewcontrol.NodeControl;
 public class GraphPane extends javax.swing.JPanel {
 
     private GraphControl GC;
-    private BufferedImage BI, BI2;
+    private BufferedImage BI, BI2,BI3;
     private ItemControl Hightlighted;
+    private Point mouse;
 
     public GraphControl getGC() {
         return GC;
@@ -46,14 +48,22 @@ public class GraphPane extends javax.swing.JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        NodeControl nhl = null;
-        EdgeControl ehl = null;
+        NodeControl nhl = null, nsel = null;
+        EdgeControl ehl = null, esel = null;
         //&& (this.Hightlighted.class==NodeControl.class)
         if (this.Hightlighted != null) {
             if (this.Hightlighted.getClass() == NodeControl.class) {
                 nhl = (NodeControl) Hightlighted;
             } else {
                 ehl = (EdgeControl) Hightlighted;
+            }
+
+        }
+        if (this.GC.getSelected() != null) {
+            if (this.GC.getSelected().getClass() == NodeControl.class) {
+                nsel = (NodeControl) this.GC.getSelected();
+            } else {
+                esel = (EdgeControl) this.GC.getSelected();
             }
 
         }
@@ -72,13 +82,24 @@ public class GraphPane extends javax.swing.JPanel {
                 if (ehl == ec) {
                     g.setColor(Color.red);
                 }
+                if (esel == ec) {
+                    g.setColor(Color.green);
+                }
                 g.drawLine(A.x, A.y, B.x, B.y);
+                g.setColor(Color.black);
+            }
+            if(nsel!=null && this.GC.getMode() == mode.addEdge){
+                g.setColor(Color.green);
+                g.drawLine(nsel.getPoint().x, nsel.getPoint().y, this.mouse.x, this.mouse.y);
                 g.setColor(Color.black);
             }
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-                if (nhl == nc) {
+
+                if (nsel == nc) {
+                    g.drawImage(BI3, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                } else if (nhl == nc) {
                     g.drawImage(BI2, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
                 } else {
                     g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
@@ -91,6 +112,7 @@ public class GraphPane extends javax.swing.JPanel {
         try {
             BI = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node.png"));
             BI2 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\NodeSelected.png"));
+            BI3 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node2.png"));
         } catch (IOException ex) {
             System.out.println("ERRO AO LER IMAGEM NODE");
         }
@@ -152,11 +174,12 @@ public class GraphPane extends javax.swing.JPanel {
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         this.Hightlighted = this.GC.searchPoint(evt.getPoint());
+        this.mouse = evt.getPoint();
         this.repaint();
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        if (this.Hightlighted != null && this.Hightlighted.getClass()==NodeControl.class) {
+        if (this.Hightlighted != null && this.Hightlighted.getClass() == NodeControl.class) {
             NodeControl nc = (NodeControl) this.Hightlighted;
             nc.setPoint(evt.getPoint());
             this.repaint();

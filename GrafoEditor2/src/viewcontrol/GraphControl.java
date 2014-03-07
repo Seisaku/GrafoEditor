@@ -26,6 +26,17 @@ public class GraphControl {
     private mode mode;
     private ItemControl selected;
 
+    public ItemControl getSelected() {
+        return selected;
+    }
+
+    public void setSelected(ItemControl selected) {
+        this.selected = selected;
+    }
+    
+    
+    
+
     public GraphControl() {
         this.mode = mode.sel;
         this.Graph = new Graph(null);
@@ -226,23 +237,21 @@ public class GraphControl {
 //                System.out.println(nodeControl.getNode().getName() + " encontrado..");
                 return nodeControl;
             }
-            Line2D Line;
-            for (EdgeControl edgeControl : EC) {
-                Point A = edgeControl.getA().getPoint(), B = edgeControl.getB().getPoint();
-                int xinf = A.x < B.x ? A.x : B.x;
-                int yinf = A.y < B.y ? A.y : B.y;
-                int xsup = A.x > B.x ? A.x : B.x;
-                int ysup = A.y > B.y ? A.y : B.y;
-                Line = new Line2D.Double(A, B);
-                for (EdgeControl ec : EC) {
-                    if (Line.ptLineDist(P) < 5) {
-                        if (P.x > xinf && P.x < xsup && P.y > yinf && P.y < ysup) {
-                            return ec;
-                        }
-                    }
-                }
+        }
+        Line2D Line;
+        for (EdgeControl edgeControl : EC) {
+            Point A = edgeControl.getA().getPoint(), B = edgeControl.getB().getPoint();
+            int xinf = A.x < B.x ? A.x : B.x;
+            int yinf = A.y < B.y ? A.y : B.y;
+            int xsup = A.x > B.x ? A.x : B.x;
+            int ysup = A.y > B.y ? A.y : B.y;
+            boolean LimX = (P.x > xinf && P.x < xsup);
+            boolean LimY = (P.y > yinf && P.y < ysup);
+            boolean Limite = (xsup - xinf) > (ysup - yinf) ? LimX : LimY;
+            Line = new Line2D.Double(A, B);
+            if (Limite && Line.ptLineDist(P) < 5) {
+                return edgeControl;
             }
-
         }
         return null;
     }
