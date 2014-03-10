@@ -22,10 +22,11 @@ import model.Node;
 public class GraphControl {
 
     private Graph Graph;
-    private ArrayList<EdgeControl> EC;
-    private ArrayList<NodeControl> NC;
+    private final ArrayList<EdgeControl> EC;
+    private final ArrayList<NodeControl> NC;
     private mode mode;
     private ItemControl selected;
+
 
     public ItemControl getSelected() {
         return selected;

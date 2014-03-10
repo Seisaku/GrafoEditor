@@ -35,7 +35,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void setGC(GraphControl GC) {
         this.GC = GC;
-    }        
+    }
+    
+    
 
     /**
      * Creates new form MainFrame
@@ -44,8 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         new GEoptions();
         this.setVisible(true);
-        this.GC = new GraphControl();
-        this.graphPaneContainer1.getGP().setGC(this.GC);
+        this.GC = this.graphPaneContainer1.getGP().getGC();        
         this.toolPanel1.setMF(this);
     }
 

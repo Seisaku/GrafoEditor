@@ -9,6 +9,9 @@ import config.GEoptions;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
 import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
 import viewcontrol.ItemControl;
@@ -63,7 +66,7 @@ public class GraphPane extends javax.swing.JPanel {
             }
 
         }
-        if (this.GC != null) {            
+        if (this.GC != null) {
             EdgeControl ec;
             NodeControl nc;
             Point A, B;
@@ -81,7 +84,7 @@ public class GraphPane extends javax.swing.JPanel {
                 g.drawLine(A.x, A.y, B.x, B.y);
                 g.setColor(Color.black);
             }
-            if(nsel!=null && this.GC.getMode() == mode.addEdge){
+            if (nsel != null && this.GC.getMode() == mode.addEdge) {
                 g.setColor(Color.green);
                 g.drawLine(nsel.getPoint().x, nsel.getPoint().y, this.mouse.x, this.mouse.y);
                 g.setColor(Color.black);
@@ -90,22 +93,28 @@ public class GraphPane extends javax.swing.JPanel {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
                 if (nsel == nc) {
-                    GEoptions.getNodeSel().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeSel().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeSel().getIconHeight()/2));                   
+                    GEoptions.getNodeSel().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeSel().getIconWidth() / 2), nc.getPoint().y - (GEoptions.getNodeSel().getIconHeight() / 2));
                 } else if (nhl == nc) {
-                    GEoptions.getNodeHL().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeHL().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeHL().getIconHeight()/2));
+                    GEoptions.getNodeHL().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeHL().getIconWidth() / 2), nc.getPoint().y - (GEoptions.getNodeHL().getIconHeight() / 2));
                 } else {
-                    GEoptions.getNodeImg().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeImg().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeImg().getIconHeight()/2));
+                    GEoptions.getNodeImg().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeImg().getIconWidth() / 2), nc.getPoint().y - (GEoptions.getNodeImg().getIconHeight() / 2));
                 }
             }
         }
     }
+
     /**
      * Creates new form GraphPane
      */
     public GraphPane() {
         initComponents();
-        
+        this.GC = new GraphControl();
+        actiondel ac = new actiondel(this);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke( "DELETE" ), "actiondelete");
+        this.getActionMap().put("actiondelete",ac);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,10 +125,8 @@ public class GraphPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setAutoscrolls(true);
         addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                formMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
@@ -148,8 +155,9 @@ public class GraphPane extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if (this.Hightlighted != null) {
             this.GC.GCnotify(Hightlighted);
+        }else{
+            this.GC.GCnotify(evt.getPoint());
         }
-        this.GC.GCnotify(evt.getPoint());
         this.repaint();
 
     }//GEN-LAST:event_formMouseClicked
@@ -168,10 +176,36 @@ public class GraphPane extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_formMouseDragged
 
-    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formMouseReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+static class actiondel extends AbstractAction{
+        private GraphPane GP;
+
+        public GraphPane getGP() {
+            return GP;
+        }
+
+        public void setGP(GraphPane GP) {
+            this.GP = GP;
+        }
+
+        public actiondel(GraphPane GP) {
+            this.GP = GP;
+        }
+        
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(this.GP.getGC().getSelected()!=null){
+                System.out.println(this.GP.getGC().getSelected());
+            }else{
+                System.out.println("No selection");
+            }
+            
+            
+        }
+    
+    }
+    
 }

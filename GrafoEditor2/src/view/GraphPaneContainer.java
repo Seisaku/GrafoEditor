@@ -50,20 +50,19 @@ public class GraphPaneContainer extends javax.swing.JPanel {
 
         TabsPane = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
         GP = new view.GraphPane();
 
+        setAutoscrolls(true);
         setMinimumSize(new java.awt.Dimension(300, 300));
         setPreferredSize(new java.awt.Dimension(300, 300));
         setLayout(new java.awt.BorderLayout());
 
+        TabsPane.setAutoscrolls(true);
         TabsPane.setName(""); // NOI18N
 
         jScrollPane1.setAutoscrolls(true);
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 1000));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 1000));
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout GPLayout = new javax.swing.GroupLayout(GP);
         GP.setLayout(GPLayout);
@@ -76,9 +75,7 @@ public class GraphPaneContainer extends javax.swing.JPanel {
             .addGap(0, 360, Short.MAX_VALUE)
         );
 
-        jPanel1.add(GP, java.awt.BorderLayout.CENTER);
-
-        jScrollPane1.setViewportView(jPanel1);
+        jScrollPane1.setViewportView(GP);
 
         TabsPane.addTab("Grafo", jScrollPane1);
         jScrollPane1.getAccessibleContext().setAccessibleDescription("");
@@ -91,7 +88,6 @@ public class GraphPaneContainer extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.GraphPane GP;
     private javax.swing.JTabbedPane TabsPane;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

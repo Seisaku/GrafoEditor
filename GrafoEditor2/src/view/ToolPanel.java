@@ -24,8 +24,8 @@ public class ToolPanel extends javax.swing.JPanel {
     }    
     
     public void resetButtom(){
-        this.jToggleButton1.setSelected(false);
-        this.jToggleButton2.setSelected(false);
+        this.NodeButtom.setSelected(false);
+        this.EdgeButtom.setSelected(false);
     }
     /**
      * Creates new form ToolPanel
@@ -43,87 +43,49 @@ public class ToolPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        Remove = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        NodeButtom = new javax.swing.JToggleButton();
+        EdgeButtom = new javax.swing.JToggleButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddNode.png"))); // NOI18N
-        jToggleButton1.setMaximumSize(new java.awt.Dimension(40, 40));
-        jToggleButton1.setMinimumSize(new java.awt.Dimension(40, 40));
-        jToggleButton1.setPreferredSize(new java.awt.Dimension(40, 40));
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        NodeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddNode.png"))); // NOI18N
+        NodeButtom.setMnemonic('V');
+        NodeButtom.setToolTipText("Adicionar Vértice");
+        NodeButtom.setMaximumSize(new java.awt.Dimension(40, 40));
+        NodeButtom.setMinimumSize(new java.awt.Dimension(40, 40));
+        NodeButtom.setPreferredSize(new java.awt.Dimension(40, 40));
+        NodeButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                NodeButtomActionPerformed(evt);
             }
         });
-        add(jToggleButton1);
+        add(NodeButtom);
 
-        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddAresta.png"))); // NOI18N
-        jToggleButton2.setMaximumSize(new java.awt.Dimension(40, 40));
-        jToggleButton2.setMinimumSize(new java.awt.Dimension(40, 40));
-        jToggleButton2.setPreferredSize(new java.awt.Dimension(40, 40));
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        EdgeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddAresta.png"))); // NOI18N
+        EdgeButtom.setMnemonic('A');
+        EdgeButtom.setToolTipText("Adicionar Aresta");
+        EdgeButtom.setMaximumSize(new java.awt.Dimension(40, 40));
+        EdgeButtom.setMinimumSize(new java.awt.Dimension(40, 40));
+        EdgeButtom.setPreferredSize(new java.awt.Dimension(40, 40));
+        EdgeButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                EdgeButtomActionPerformed(evt);
             }
         });
-        add(jToggleButton2);
-
-        Remove.setMaximumSize(new java.awt.Dimension(40, 40));
-        Remove.setMinimumSize(new java.awt.Dimension(40, 40));
-        Remove.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(Remove);
-
-        jButton4.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton4.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton4.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton4);
-
-        jButton5.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton5.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton5.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton5);
-
-        jButton6.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton6.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton6.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton6);
-
-        jButton7.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton7.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton7.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton7);
-
-        jButton8.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton8.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton8.setPreferredSize(new java.awt.Dimension(40, 40));
-        add(jButton8);
+        add(EdgeButtom);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void NodeButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodeButtomActionPerformed
         this.MF.getGC().setMode(mode.addNode);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_NodeButtomActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void EdgeButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdgeButtomActionPerformed
         this.MF.getGC().setMode(mode.addEdge);
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_EdgeButtomActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Remove;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton EdgeButtom;
+    private javax.swing.JToggleButton NodeButtom;
     // End of variables declaration//GEN-END:variables
 }

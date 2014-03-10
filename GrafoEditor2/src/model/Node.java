@@ -63,4 +63,11 @@ public class Node implements GraphItem{
     public int getDegree() {
         return Edges.size();
     }
+
+    @Override
+    public String toString() {
+        return "Node{" + ", Name=" + Name + "Edges=" + Edges + '}';
+    }
+    
+    
 }

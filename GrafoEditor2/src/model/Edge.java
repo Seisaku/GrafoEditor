@@ -99,4 +99,11 @@ public class Edge implements GraphItem{
     public void setName(String Name) {
         this.Name = Name;
     }
+
+    @Override
+    public String toString() {
+        return "Edge{Name=" + Name + "A=" + A.getName() + ", B=" + B.getName() + ", Weight=" + Weight + '}';
+    }
+    
+    
 }

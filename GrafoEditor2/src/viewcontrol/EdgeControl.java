@@ -83,5 +83,12 @@ public class EdgeControl extends ItemControl {
     public void remove() {
         
     }
+
+    @Override
+    public String toString() {
+        return "EdgeControl{" + this.Edge + '}';
+    }
+    
+    
     
 }
