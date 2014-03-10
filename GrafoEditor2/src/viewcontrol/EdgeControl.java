@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package viewcontrol;
 
 import java.awt.Point;
@@ -15,9 +14,10 @@ import model.Edge;
  * @author Rafael
  */
 public class EdgeControl extends ItemControl {
+
     private Edge Edge;
     private ArrayList<Point> PseudoNodes;
-    private NodeControl A,B;
+    private NodeControl A, B;
     private GraphControl GC;
 
     public GraphControl getGC() {
@@ -27,14 +27,13 @@ public class EdgeControl extends ItemControl {
     public void setGC(GraphControl GC) {
         this.GC = GC;
     }
-    
-    
 
-    EdgeControl(Edge E,NodeControl A,NodeControl B) {
-        this.Edge = E;
-//TODO new edgecontrol        
-    this.A = A;
-    this.B = B;
+    EdgeControl(Edge E, NodeControl A, NodeControl B) {
+        this.Edge = E;  
+        this.A = A;
+        this.B = B;
+        A.getNode().addEdge(E);
+        B.getNode().addEdge(E);
     }
 
     public NodeControl getA() {
@@ -57,15 +56,15 @@ public class EdgeControl extends ItemControl {
         this.Edge = Edge;
         this.PseudoNodes = PseudoNodes;
     }
-    
-    public ArrayList<Point> getPseudoNodes() {
-        return PseudoNodes;
+
+    public Point getPseudoNodes(int i) {
+        return PseudoNodes.get(i);
     }
 
-    public void setPseudoNodes(ArrayList<Point> PseudoNodes) {
-        this.PseudoNodes = PseudoNodes;
+    public void addPseudoNodes(Point PseudoNode) {
+        this.PseudoNodes.add(PseudoNode);
     }
-    
+
     public Edge getEdge() {
         return Edge;
     }
@@ -74,21 +73,17 @@ public class EdgeControl extends ItemControl {
         this.Edge = Edge;
     }
 
-    
     public void select() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void remove() {
-        
     }
 
     @Override
     public String toString() {
         return "EdgeControl{" + this.Edge + '}';
     }
-    
-    
-    
+
 }

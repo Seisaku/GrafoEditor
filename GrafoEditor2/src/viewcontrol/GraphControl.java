@@ -193,8 +193,9 @@ public class GraphControl {
 //                System.out.println("Case addEdge");
                 if (this.selected == null) {
                 this.selected = N;
-            } else {
-                NodeControl nc1 = (NodeControl) this.selected, nc2 = N;
+            } else if(this.selected.getClass() == NodeControl.class){
+                
+                    NodeControl nc1 = (NodeControl) this.selected, nc2 = N;
 //                    System.out.println("Aresta entre: "+nc1.getNode().getName()+" e "+nc2.getNode().getName());
                 this.addEdgeControl(this, nc1, nc2);
             }
@@ -278,7 +279,7 @@ public class GraphControl {
     }
 
     private void addEdgeControl(GraphControl GC, NodeControl nc1, NodeControl nc2) {
-        Edge E = new Edge("e" + this.EC.size() + 1, nc1.getNode(), nc2.getNode(), 0);
+        Edge E = new Edge("e" + (this.EC.size()+1), nc1.getNode(), nc2.getNode(), 0);
         this.Graph.addEdge(E);
         EC.add(new EdgeControl(E, nc1, nc2));
 //        System.out.println("Vertice adicionado: " + E.getName());

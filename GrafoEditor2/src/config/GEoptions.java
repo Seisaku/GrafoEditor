@@ -17,32 +17,7 @@ public class GEoptions {
     private static Color hightlight = Color.GREEN;
     private static int NodeDist = 25;
     private static int EdgeDist = 5;
-    private static String img1="resource/Node",img2="resource/NodeSel",img3="resource/Node2";
     private static ImageIcon NodeImg,NodeHL,NodeSel;
-    
-    public static String getImg1() {
-        return img1;
-    }
-
-    public static void setImg1(String aImg1) {
-        img1 = aImg1;
-    }
-
-    public static String getImg2() {
-        return img2;
-    }
-
-    public static void setImg2(String aImg2) {
-        img2 = aImg2;
-    }
-
-    public static String getImg3() {
-        return img3;
-    }
-
-    public static void setImg3(String aImg3) {
-        img3 = aImg3;
-    }
 
     public GEoptions() {
         NodeImg = new ImageIcon(this.getClass().getResource("/resource/NodeImg.png"));

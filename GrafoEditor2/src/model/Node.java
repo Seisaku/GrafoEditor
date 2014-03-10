@@ -32,6 +32,7 @@ public class Node implements GraphItem{
 
     public Node(String Name) {
         this.Name = Name;
+        Edges = new ArrayList<>();
     }
 
     public String getName() {
@@ -66,7 +67,7 @@ public class Node implements GraphItem{
 
     @Override
     public String toString() {
-        return "Node{" + ", Name=" + Name + "Edges=" + Edges + '}';
+        return this.Name;
     }
     
     
