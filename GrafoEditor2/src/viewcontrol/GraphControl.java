@@ -5,6 +5,7 @@
  */
 package viewcontrol;
 
+import config.GEoptions;
 import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
@@ -188,7 +189,6 @@ public class GraphControl {
 //                System.out.println(N.getNode().getName()+" selecionado");
                 break;
             case addEdge:
-                //TODO addEdge
 //                System.out.println("Case addEdge");
                 if (this.selected == null) {
                 this.selected = N;
@@ -228,12 +228,15 @@ public class GraphControl {
             case addNode:
                 this.addNodeControl(this, P);
                 break;
+            case sel:
+                this.selected = null;
+                break;
         }
     }
 
     public ItemControl searchPoint(Point P) {
         for (NodeControl nodeControl : NC) {
-            if (P.distance(nodeControl.getPoint()) < 25) {
+            if (P.distance(nodeControl.getPoint()) < GEoptions.getNodeDist()) {
 //                System.out.println(nodeControl.getNode().getName() + " encontrado..");
                 return nodeControl;
             }
@@ -249,7 +252,7 @@ public class GraphControl {
             boolean LimY = (P.y > yinf && P.y < ysup);
             boolean Limite = (xsup - xinf) > (ysup - yinf) ? LimX : LimY;
             Line = new Line2D.Double(A, B);
-            if (Limite && Line.ptLineDist(P) < 5) {
+            if (Limite && Line.ptLineDist(P) < GEoptions.getEdgeDist()) {
                 return edgeControl;
             }
         }

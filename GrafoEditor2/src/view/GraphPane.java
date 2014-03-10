@@ -5,13 +5,10 @@
  */
 package view;
 
+import config.GEoptions;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
 import viewcontrol.ItemControl;
@@ -25,7 +22,6 @@ import viewcontrol.mode;
 public class GraphPane extends javax.swing.JPanel {
 
     private GraphControl GC;
-    private BufferedImage BI, BI2,BI3;
     private ItemControl Hightlighted;
     private Point mouse;
 
@@ -67,10 +63,7 @@ public class GraphPane extends javax.swing.JPanel {
             }
 
         }
-        if (this.GC != null) {
-            if (BI == null) {
-                this.startBI();
-            }
+        if (this.GC != null) {            
             EdgeControl ec;
             NodeControl nc;
             Point A, B;
@@ -96,33 +89,22 @@ public class GraphPane extends javax.swing.JPanel {
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-
                 if (nsel == nc) {
-                    g.drawImage(BI3, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                    GEoptions.getNodeSel().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeSel().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeSel().getIconHeight()/2));                   
                 } else if (nhl == nc) {
-                    g.drawImage(BI2, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                    GEoptions.getNodeHL().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeHL().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeHL().getIconHeight()/2));
                 } else {
-                    g.drawImage(BI, nc.getPoint().x - 15, nc.getPoint().y - 15, this);
+                    GEoptions.getNodeImg().paintIcon(this, g, nc.getPoint().x - (GEoptions.getNodeImg().getIconWidth()/2), nc.getPoint().y - (GEoptions.getNodeImg().getIconHeight()/2));
                 }
             }
         }
     }
-
-    public void startBI() {
-        try {
-            BI = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node.png"));
-            BI2 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\NodeSelected.png"));
-            BI3 = ImageIO.read(new File("C:\\Users\\I839169\\Documents\\NetBeansProjects\\GrafoEditor\\GrafoEditor2\\src\\resouce\\Node2.png"));
-        } catch (IOException ex) {
-            System.out.println("ERRO AO LER IMAGEM NODE");
-        }
-    }
-
     /**
      * Creates new form GraphPane
      */
     public GraphPane() {
         initComponents();
+        
     }
 
     /**

@@ -54,7 +54,7 @@ public class ToolPanel extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddNode.png"))); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddNode.png"))); // NOI18N
         jToggleButton1.setMaximumSize(new java.awt.Dimension(40, 40));
         jToggleButton1.setMinimumSize(new java.awt.Dimension(40, 40));
         jToggleButton1.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -65,7 +65,7 @@ public class ToolPanel extends javax.swing.JPanel {
         });
         add(jToggleButton1);
 
-        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resouce/Icon-AddAresta.png"))); // NOI18N
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddAresta.png"))); // NOI18N
         jToggleButton2.setMaximumSize(new java.awt.Dimension(40, 40));
         jToggleButton2.setMinimumSize(new java.awt.Dimension(40, 40));
         jToggleButton2.setPreferredSize(new java.awt.Dimension(40, 40));

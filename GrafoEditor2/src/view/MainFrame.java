@@ -18,6 +18,7 @@
 
 package view;
 
+import config.GEoptions;
 import viewcontrol.GraphControl;
 
 /**
@@ -41,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        new GEoptions();
         this.setVisible(true);
         this.GC = new GraphControl();
         this.graphPaneContainer1.getGP().setGC(this.GC);
