@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class Node implements GraphItem {
 
-    private ArrayList<Edge> Edges;
+    private final ArrayList<Edge> Edges;
     private String Name;
 
     public Node(String Name) {
@@ -44,7 +44,7 @@ public class Node implements GraphItem {
     }
 
     public ArrayList<Edge> getEdges() {
-        return new ArrayList<>(this.getEdges());
+        return new ArrayList<>(this.Edges);
     }
 
     public void setEdges(ArrayList<Edge> Edges) {

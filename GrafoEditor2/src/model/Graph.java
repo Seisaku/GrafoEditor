@@ -73,15 +73,11 @@ public class Graph {
 //        System.out.println("add Edge");
     }
 
-    public void remove(Edge edge) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeEdge(Edge edge) {
+        return this.Edges.remove(edge);
     }
 
-    public void removeEdge(Edge edge) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void removeNode(Node node) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeNode(Node node) {
+        return this.Nodes.remove(node);
     }
 }

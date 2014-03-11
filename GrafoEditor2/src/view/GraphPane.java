@@ -7,11 +7,15 @@ package view;
 
 import config.GEoptions;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
+import javax.swing.Scrollable;
+import javax.swing.border.LineBorder;
 import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
 import viewcontrol.ItemControl;
@@ -22,7 +26,7 @@ import viewcontrol.mode;
  *
  * @author I839169
  */
-public class GraphPane extends javax.swing.JPanel {
+public class GraphPane extends javax.swing.JPanel implements Scrollable{
 
     private GraphControl GC;
     private ItemControl Hightlighted;
@@ -115,6 +119,10 @@ public class GraphPane extends javax.swing.JPanel {
         this.getActionMap().put("actiondelete",ad);
         this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke( "ESCAPE" ), "actionescape");
         this.getActionMap().put("actionescape",ae);
+        setAutoscrolls(true);
+        
+        this.setBorder(new LineBorder(Color.black));
+        this.revalidate();
     }
     
     
@@ -181,10 +189,16 @@ public class GraphPane extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        //this.setPreferredSize(new Dimension(evt.getPoint().x+20,evt.getPoint().y+20));
+        //this.revalidate();
         if (this.Hightlighted != null && this.Hightlighted.getClass() == NodeControl.class) {
             NodeControl nc = (NodeControl) this.Hightlighted;
             nc.setPoint(evt.getPoint());
             this.repaint();
+        }else{
+            //System.out.print("*");
+            //Rectangle r = new Rectangle(evt.getX(), evt.getY(), 1, 1);
+            //scrollRectToVisible(r);
         }
     }//GEN-LAST:event_formMouseDragged
 
@@ -195,6 +209,32 @@ public class GraphPane extends javax.swing.JPanel {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyReleased
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        return getPreferredSize();
+    }
+
+    @Override
+    public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 20;
+    }
+
+    @Override
+    public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 20;
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportWidth() {
+        return false;
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportHeight() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -241,7 +281,9 @@ static class ActionKeyPressDel extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(this.GP.getGC().getSelected()!=null){
-                System.out.println(this.GP.getGC().getSelected());
+                //System.out.println(this.GP.getGC().getSelected());
+                this.GP.getGC().removeItem(this.GP.getGC().getSelected());
+                GP.repaint();
             }else{
                 System.out.println("No selection");
             }

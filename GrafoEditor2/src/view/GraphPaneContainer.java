@@ -64,15 +64,17 @@ public class GraphPaneContainer extends javax.swing.JPanel {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 1000));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
+        GP.setPreferredSize(null);
+
         javax.swing.GroupLayout GPLayout = new javax.swing.GroupLayout(GP);
         GP.setLayout(GPLayout);
         GPLayout.setHorizontalGroup(
             GPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 515, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         GPLayout.setVerticalGroup(
             GPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(GP);

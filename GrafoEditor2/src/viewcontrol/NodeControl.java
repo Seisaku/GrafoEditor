@@ -6,6 +6,7 @@
 package viewcontrol;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import model.Node;
 
 /**
@@ -17,7 +18,20 @@ public class NodeControl extends ItemControl {
     private Node Node;
     private Point Point;
     private GraphControl GC;
+    private final ArrayList<EdgeControl> EC;
 
+    public void addEC(EdgeControl ec){
+        this.EC.add(ec);
+    }
+    
+    public ArrayList<EdgeControl> getEC(){
+        return new ArrayList<>(EC);
+    }
+    
+    public boolean removeEC(EdgeControl ec){
+        return EC.remove(ec);
+    }
+    
     public GraphControl getGC() {
         return GC;
     }
@@ -26,11 +40,18 @@ public class NodeControl extends ItemControl {
         this.GC = GC;
     }
 
+    NodeControl(){
+        EC = new ArrayList<>();
+    }
+    
     NodeControl(Node N) {
+        this();
         this.Node = N;
+        
     }
 
     public NodeControl(Node Node, Point Point) {
+        this();
         this.Node = Node;
         this.Point = Point;
     }
