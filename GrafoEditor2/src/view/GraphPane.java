@@ -142,6 +142,14 @@ public class GraphPane extends javax.swing.JPanel {
                 formMouseMoved(evt);
             }
         });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,10 +164,11 @@ public class GraphPane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+       
         if (this.Hightlighted != null) {
-            this.GC.GCnotify(Hightlighted);
+            this.GC.GCnotify(Hightlighted,evt.isShiftDown());
         }else{
-            this.GC.GCnotify(evt.getPoint());
+            this.GC.GCnotify(evt.getPoint(),evt.isShiftDown());
         }
         this.repaint();
 
@@ -178,6 +187,14 @@ public class GraphPane extends javax.swing.JPanel {
             this.repaint();
         }
     }//GEN-LAST:event_formMouseDragged
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

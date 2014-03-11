@@ -16,9 +16,11 @@
  * and open the template in the editor.
  */
 
+
 package view;
 
 import config.GEoptions;
+import java.awt.event.KeyEvent;
 import viewcontrol.GraphControl;
 
 /**
@@ -26,8 +28,10 @@ import viewcontrol.GraphControl;
  * @author Rafael
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     private GraphControl GC;
+    private boolean ctrlstate;
+    private boolean shiftstate;
 
     public GraphControl getGC() {
         return GC;
@@ -36,8 +40,6 @@ public class MainFrame extends javax.swing.JFrame {
     public void setGC(GraphControl GC) {
         this.GC = GC;
     }
-    
-    
 
     /**
      * Creates new form MainFrame
@@ -51,10 +53,10 @@ public class MainFrame extends javax.swing.JFrame {
         this.toolPanel1.setMF(this);
     }
 
-    public void resetButtom(){
+    public void resetButtom() {
         this.toolPanel1.resetButtom();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,6 +98,14 @@ public class MainFrame extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(600, 600));
         setPreferredSize(new java.awt.Dimension(1000, 600));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         jLayeredPane1.setLayout(new java.awt.BorderLayout());
 
@@ -148,6 +158,28 @@ public class MainFrame extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        System.out.print("*");
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
+            this.ctrlstate = true;
+            System.out.println("CTRL");
+        } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
+            this.shiftstate = true;
+            System.out.println("SHIFT");
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        System.out.print(".");
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
+            this.ctrlstate = false;
+            System.out.println("RELEASE CTRL");
+        } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
+            this.shiftstate = false;
+            System.out.println("RELEASE SHIFT");
+        }
+    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments

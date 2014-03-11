@@ -191,7 +191,7 @@ public class GraphControl {
         return null;
     }
 
-    public void GCnotify(NodeControl N) {
+    public void GCnotify(NodeControl N,boolean S) {
 //        System.out.println("Notify N");
         switch (mode) {
             case remNode:
@@ -210,7 +210,7 @@ public class GraphControl {
                 
                     NodeControl nc1 = (NodeControl) this.selected, nc2 = N;
 //                    System.out.println("Aresta entre: "+nc1.getNode().getName()+" e "+nc2.getNode().getName());
-                this.addEdgeControl(this, nc1, nc2);
+                this.addEdgeControl(this, nc1, nc2,S);
             }
                 break;
 
@@ -218,15 +218,15 @@ public class GraphControl {
 
     }
 
-    public void GCnotify(ItemControl I) {
+    public void GCnotify(ItemControl I,boolean S) {
         if (I.getClass() == EdgeControl.class) {
-            this.GCnotify((EdgeControl) I);
+            this.GCnotify((EdgeControl) I,S);
         } else {
-            this.GCnotify((NodeControl) I);
+            this.GCnotify((NodeControl) I,S);
         }
     }
 
-    public void GCnotify(EdgeControl E) {
+    public void GCnotify(EdgeControl E,boolean S) {
         switch (mode) {
             case remEdge:
                 this.removeEdge(E);
@@ -238,10 +238,10 @@ public class GraphControl {
         }
     }
 
-    public void GCnotify(Point P) {
+    public void GCnotify(Point P,boolean S) {
         switch (mode) {
             case addNode:
-                this.addNodeControl(this, P);
+                this.addNodeControl(this, P,S);
                 break;
             case sel:
                 this.selected = null;
@@ -291,21 +291,25 @@ public class GraphControl {
     private void addNode(Point P) {
     }
 
-    private void addEdgeControl(GraphControl GC, NodeControl nc1, NodeControl nc2) {
+    private void addEdgeControl(GraphControl GC, NodeControl nc1, NodeControl nc2,boolean S) {
         Edge E = new Edge("e" + (this.EC.size()+1), nc1.getNode(), nc2.getNode(), 0);
         this.Graph.addEdge(E);
         EC.add(new EdgeControl(E, nc1, nc2));
 //        System.out.println("Vertice adicionado: " + E.getName());
         this.selected = null;
-        this.setMode(mode.sel);        
+        if(!S){
+            this.setMode(mode.sel);
+        }
     }
 
-    private void addNodeControl(GraphControl GC, Point P) {
+    private void addNodeControl(GraphControl GC, Point P,boolean S) {
         Node N = new Node("v" + (this.NC.size() + 1));
         this.Graph.addNode(N);
         NC.add(new NodeControl(N, P));
 //        System.out.println("Node adicionado: " + N.getName());
-        this.setMode(mode.sel);
+        if(!S){
+            this.setMode(mode.sel);
+        }
     }
 
 }
