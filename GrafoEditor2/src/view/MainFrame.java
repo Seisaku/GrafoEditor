@@ -46,10 +46,15 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         new GEoptions();
         this.setVisible(true);
-        this.GC = this.graphPaneContainer1.getGP().getGC();        
+        this.GC = this.graphPaneContainer1.getGP().getGC();
+        this.graphPaneContainer1.getGP().getGC().setMF(this);
         this.toolPanel1.setMF(this);
     }
 
+    public void resetButtom(){
+        this.toolPanel1.resetButtom();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

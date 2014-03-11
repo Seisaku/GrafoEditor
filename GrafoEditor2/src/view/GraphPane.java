@@ -109,9 +109,12 @@ public class GraphPane extends javax.swing.JPanel {
     public GraphPane() {
         initComponents();
         this.GC = new GraphControl();
-        actiondel ac = new actiondel(this);
+        ActionKeyPressDel ad = new ActionKeyPressDel(this);
+        ActionKeyPressEsc ae = new ActionKeyPressEsc(this);
         this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke( "DELETE" ), "actiondelete");
-        this.getActionMap().put("actiondelete",ac);
+        this.getActionMap().put("actiondelete",ad);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke( "ESCAPE" ), "actionescape");
+        this.getActionMap().put("actionescape",ae);
     }
     
     
@@ -178,8 +181,7 @@ public class GraphPane extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
-static class actiondel extends AbstractAction{
+static class ActionKeyPressEsc extends AbstractAction{
         private GraphPane GP;
 
         public GraphPane getGP() {
@@ -190,7 +192,31 @@ static class actiondel extends AbstractAction{
             this.GP = GP;
         }
 
-        public actiondel(GraphPane GP) {
+        public ActionKeyPressEsc(GraphPane GP) {
+            this.GP = GP;
+        }
+        
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {                        
+                GP.getGC().setSelected(null);   
+                GP.getGC().setMode(mode.sel);
+                GP.repaint();
+        }
+    
+    }
+static class ActionKeyPressDel extends AbstractAction{
+        private GraphPane GP;
+
+        public GraphPane getGP() {
+            return GP;
+        }
+
+        public void setGP(GraphPane GP) {
+            this.GP = GP;
+        }
+
+        public ActionKeyPressDel(GraphPane GP) {
             this.GP = GP;
         }
         

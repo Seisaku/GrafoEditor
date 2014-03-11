@@ -24,8 +24,9 @@ public class ToolPanel extends javax.swing.JPanel {
     }    
     
     public void resetButtom(){
-        this.NodeButtom.setSelected(false);
-        this.EdgeButtom.setSelected(false);
+        this.addButtomGroup.clearSelection();
+        //this.NodeButtom.setSelected(false);
+        //this.EdgeButtom.setSelected(false);
     }
     /**
      * Creates new form ToolPanel
@@ -43,11 +44,13 @@ public class ToolPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addButtomGroup = new javax.swing.ButtonGroup();
         NodeButtom = new javax.swing.JToggleButton();
         EdgeButtom = new javax.swing.JToggleButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
+        addButtomGroup.add(NodeButtom);
         NodeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddNode.png"))); // NOI18N
         NodeButtom.setMnemonic('V');
         NodeButtom.setToolTipText("Adicionar Vértice");
@@ -61,6 +64,7 @@ public class ToolPanel extends javax.swing.JPanel {
         });
         add(NodeButtom);
 
+        addButtomGroup.add(EdgeButtom);
         EdgeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddAresta.png"))); // NOI18N
         EdgeButtom.setMnemonic('A');
         EdgeButtom.setToolTipText("Adicionar Aresta");
@@ -87,5 +91,6 @@ public class ToolPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton EdgeButtom;
     private javax.swing.JToggleButton NodeButtom;
+    private javax.swing.ButtonGroup addButtomGroup;
     // End of variables declaration//GEN-END:variables
 }

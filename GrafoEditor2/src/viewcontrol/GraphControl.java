@@ -13,6 +13,7 @@ import java.util.Iterator;
 import model.Edge;
 import model.Graph;
 import model.Node;
+import view.MainFrame;
 
 /**
  * Classe que cuida da interface entre o modelo Grafo e a GUI
@@ -26,6 +27,15 @@ public class GraphControl {
     private final ArrayList<NodeControl> NC;
     private mode mode;
     private ItemControl selected;
+    private MainFrame MF;
+
+    public MainFrame getMF() {
+        return MF;
+    }
+
+    public void setMF(MainFrame MF) {
+        this.MF = MF;
+    }
 
 
     public ItemControl getSelected() {
@@ -51,6 +61,9 @@ public class GraphControl {
     }
 
     public void setMode(mode mode) {
+        if(mode==mode.sel){
+            this.MF.resetButtom();
+        }
         this.mode = mode;
     }
 
@@ -284,7 +297,7 @@ public class GraphControl {
         EC.add(new EdgeControl(E, nc1, nc2));
 //        System.out.println("Vertice adicionado: " + E.getName());
         this.selected = null;
-        this.mode = mode.sel;
+        this.setMode(mode.sel);        
     }
 
     private void addNodeControl(GraphControl GC, Point P) {
@@ -292,7 +305,7 @@ public class GraphControl {
         this.Graph.addNode(N);
         NC.add(new NodeControl(N, P));
 //        System.out.println("Node adicionado: " + N.getName());
-        this.mode = mode.sel;
+        this.setMode(mode.sel);
     }
 
 }
