@@ -9,10 +9,12 @@ import config.GEoptions;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import javax.swing.Scrollable;
 import javax.swing.border.LineBorder;
@@ -58,6 +60,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
         super.paint(g);
         int x, y;
         float z;
+        int imgWidth;
+        int imgHeight;
+        ImageIcon zoomedIconSel, zoomedIconImg, zoomedIconHL;
         NodeControl nhl = null, nsel = null;
         EdgeControl ehl = null, esel = null;
         z = this.getZoom();
@@ -114,14 +119,23 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
                 nc = this.GC.getNC(i);
                 //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
 
-                x = (int) ((nc.getPoint().x - (GEoptions.getNodeSel().getIconWidth() / 2)) * z);
-                y = (int) ((nc.getPoint().y - (GEoptions.getNodeSel().getIconHeight() / 2)) * z);
+                x = (int) ((this.getPointZoomed(nc.getPoint()).x));// - (GEoptions.getNodeSel().getIconWidth() / 2)));
+                y = (int) ((this.getPointZoomed(nc.getPoint()).y));// - (GEoptions.getNodeSel().getIconHeight() / 2)));
                 if (nsel == nc) {
-                    GEoptions.getNodeSel().paintIcon(this, g, x, y);
+                    imgWidth = (int) (GEoptions.getNodeSel().getIconHeight() * z);
+                    imgHeight = (int) (GEoptions.getNodeSel().getIconHeight() * z);
+                    zoomedIconSel = new ImageIcon(GEoptions.getNodeSel().getImage().getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH));
+                    zoomedIconSel.paintIcon(this, g, x - zoomedIconSel.getIconWidth() / 2, y - zoomedIconSel.getIconHeight() / 2);
                 } else if (nhl == nc) {
-                    GEoptions.getNodeHL().paintIcon(this, g, x, y);
+                    imgWidth = (int) (GEoptions.getNodeHL().getIconHeight() * z);
+                    imgHeight = (int) (GEoptions.getNodeHL().getIconHeight() * z);
+                    zoomedIconHL = new ImageIcon(GEoptions.getNodeHL().getImage().getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH));
+                    zoomedIconHL.paintIcon(this, g, x - zoomedIconHL.getIconWidth() / 2, y - zoomedIconHL.getIconHeight() / 2);
                 } else {
-                    GEoptions.getNodeImg().paintIcon(this, g, x, y);
+                    imgWidth = (int) (GEoptions.getNodeImg().getIconHeight() * z);
+                    imgHeight = (int) (GEoptions.getNodeImg().getIconHeight() * z);
+                    zoomedIconImg = new ImageIcon(GEoptions.getNodeImg().getImage().getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH));
+                    zoomedIconImg.paintIcon(this, g, x - zoomedIconImg.getIconWidth() / 2, y - zoomedIconImg.getIconHeight() / 2);
                 }
             }
         }
@@ -224,9 +238,8 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
         this.repaint();
     }//GEN-LAST:event_formMouseMoved
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-
-        Point lp = this.getGC().getLastPoint();
+    private void corrigeTamanho() {
+        Point lp = this.getPointZoomed(this.getGC().getLastPoint());
         Dimension D = new Dimension(lp.x + GEoptions.getScrollMargin() + (GEoptions.getNodeImg().getIconWidth() / 2), lp.y + GEoptions.getScrollMargin() + (GEoptions.getNodeImg().getIconHeight() / 2));
         if (D.height < this.getParent().getSize().height) {
             D.height = this.getParent().getSize().height;
@@ -236,6 +249,10 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
         }
         this.setPreferredSize(D);
         this.revalidate();
+    }
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        this.corrigeTamanho();
 
         Rectangle r = new Rectangle(evt.getX() + (GEoptions.getNodeImg().getIconWidth() / 2), evt.getY() + (GEoptions.getNodeImg().getIconHeight() / 2), 1, 1);
         scrollRectToVisible(r);
@@ -259,7 +276,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
             if (zoom <= -lim) {
                 zoom = -lim;
             }
+            this.corrigeTamanho();
             this.repaint();
+            //TODO scroll up/down
         }
     }//GEN-LAST:event_formMouseWheelMoved
 
