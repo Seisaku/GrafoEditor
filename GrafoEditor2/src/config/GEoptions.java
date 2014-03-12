@@ -20,9 +20,9 @@ public class GEoptions {
     private static ImageIcon NodeImg,NodeHL,NodeSel;
 
     public GEoptions() {
-        NodeImg = new ImageIcon(this.getClass().getResource("/resource/NodeImg.png"));
-        NodeHL = new ImageIcon(this.getClass().getResource("/resource/NodeHL.png"));
-        NodeSel = new ImageIcon(this.getClass().getResource("/resource/NodeSel.png"));
+        NodeImg = new ImageIcon(this.getClass().getResource("/resource/Azul.png"));
+        NodeHL = new ImageIcon(this.getClass().getResource("/resource/Vermelha.png"));
+        NodeSel = new ImageIcon(this.getClass().getResource("/resource/Verde.png"));
     }
 
     public static ImageIcon getNodeImg() {
