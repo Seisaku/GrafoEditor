@@ -51,7 +51,7 @@ public class ToolPanel extends javax.swing.JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         addButtomGroup.add(NodeButtom);
-        NodeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddNode.png"))); // NOI18N
+        NodeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/AzulEscuro.png"))); // NOI18N
         NodeButtom.setMnemonic('V');
         NodeButtom.setToolTipText("Adicionar Vértice");
         NodeButtom.setMaximumSize(new java.awt.Dimension(40, 40));
@@ -65,7 +65,7 @@ public class ToolPanel extends javax.swing.JPanel {
         add(NodeButtom);
 
         addButtomGroup.add(EdgeButtom);
-        EdgeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Icon-AddAresta.png"))); // NOI18N
+        EdgeButtom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Aresta1.png"))); // NOI18N
         EdgeButtom.setMnemonic('A');
         EdgeButtom.setToolTipText("Adicionar Aresta");
         EdgeButtom.setMaximumSize(new java.awt.Dimension(40, 40));

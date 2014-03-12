@@ -23,8 +23,8 @@ import view.MainFrame;
 public class GraphControl {
 
     private Graph Graph;
-    private final ArrayList<EdgeControl> EC;
     private final ArrayList<NodeControl> NC;
+    private final ArrayList<EdgeControl> EC;    
     private mode mode;
     private ItemControl selected;
     private MainFrame MF;
@@ -63,6 +63,7 @@ public class GraphControl {
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
         this.NC = new ArrayList<>();
+       
     }
 
     public mode getMode() {
@@ -332,5 +333,6 @@ public class GraphControl {
         }
 
     }
+
 
 }

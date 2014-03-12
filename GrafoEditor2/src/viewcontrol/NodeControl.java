@@ -82,5 +82,9 @@ public class NodeControl extends ItemControl {
         return "NodeControl{" + this.Node + '}';
     }
 
+    void setPoint(int x, int y) {
+        this.Point = new Point(x, y);
+    }
+
     
 }

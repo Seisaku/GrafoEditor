@@ -15,11 +15,22 @@ import javax.swing.ImageIcon;
 public class GEoptions {
     private static Color selected = Color.RED;
     private static Color hightlight = Color.GREEN;
-    private static int NodeDist = 25;
+    private static int NodeDist = 40;
     private static int EdgeDist = 5;
     private static int ScrollMargin = 20;
     private static ImageIcon NodeImg,NodeHL,NodeSel;
     private static String resourcePath = "/resource/";
+    private static int zoomStep = 5;
+
+    public static int getZoomStep() {
+        return zoomStep;
+    }
+
+    public static void setZoomStep(int zoomStep) {
+        GEoptions.zoomStep = zoomStep;
+    }
+    
+    
 
     public static int getScrollMargin() {
         return ScrollMargin;
@@ -38,9 +49,9 @@ public class GEoptions {
     }        
     
     public GEoptions() {
-        NodeImg = new ImageIcon(this.getClass().getResource("/resource/Azul.png"));
-        NodeHL = new ImageIcon(this.getClass().getResource("/resource/Vermelha.png"));
-        NodeSel = new ImageIcon(this.getClass().getResource("/resource/Verde.png"));
+        NodeImg = new ImageIcon(this.getClass().getResource("/resource/AzulEscuroG.png"));
+        NodeHL = new ImageIcon(this.getClass().getResource("/resource/VermelhaG.png"));
+        NodeSel = new ImageIcon(this.getClass().getResource("/resource/VerdeEscuroG.png"));
     }
 
     public static ImageIcon getNodeImg() {
