@@ -17,8 +17,26 @@ public class GEoptions {
     private static Color hightlight = Color.GREEN;
     private static int NodeDist = 25;
     private static int EdgeDist = 5;
+    private static int ScrollMargin = 20;
     private static ImageIcon NodeImg,NodeHL,NodeSel;
+    private static String resourcePath = "/resource/";
 
+    public static int getScrollMargin() {
+        return ScrollMargin;
+    }
+
+    public static void setScrollMargin(int ScrollMargin) {
+        GEoptions.ScrollMargin = ScrollMargin;
+    }
+
+    public static String getResourcePath() {
+        return resourcePath;
+    }
+
+    public static void setResourcePath(String resourcePath) {
+        GEoptions.resourcePath = resourcePath;
+    }        
+    
     public GEoptions() {
         NodeImg = new ImageIcon(this.getClass().getResource("/resource/Azul.png"));
         NodeHL = new ImageIcon(this.getClass().getResource("/resource/Vermelha.png"));

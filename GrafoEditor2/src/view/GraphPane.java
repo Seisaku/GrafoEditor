@@ -119,8 +119,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable{
         this.getActionMap().put("actiondelete",ad);
         this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke( "ESCAPE" ), "actionescape");
         this.getActionMap().put("actionescape",ae);
-        setAutoscrolls(true);
-        
+        setAutoscrolls(true);         
         this.setBorder(new LineBorder(Color.black));
         this.revalidate();
     }
@@ -140,6 +139,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable{
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
             }
         });
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -172,7 +174,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-       
+        
         if (this.Hightlighted != null) {
             this.GC.GCnotify(Hightlighted,evt.isShiftDown());
         }else{
@@ -189,12 +191,26 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable{
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        //this.setPreferredSize(new Dimension(evt.getPoint().x+20,evt.getPoint().y+20));
-        //this.revalidate();
+        Point lp = this.getGC().getLastPoint();
+        Dimension D = new Dimension(lp.x+GEoptions.getScrollMargin(),lp.y+GEoptions.getScrollMargin());
+        if(D.height<this.getParent().getSize().height){
+            D.height=this.getParent().getSize().height;
+        }
+        if(D.width<this.getParent().getSize().width){
+           D.width=this.getParent().getSize().width; 
+        }
+        this.setPreferredSize(D);        
+        this.revalidate();
+        
+        Rectangle r = new Rectangle(evt.getX(), evt.getY(), 1, 1);
+        scrollRectToVisible(r);
+        
         if (this.Hightlighted != null && this.Hightlighted.getClass() == NodeControl.class) {
             NodeControl nc = (NodeControl) this.Hightlighted;
-            nc.setPoint(evt.getPoint());
-            this.repaint();
+            if(evt.getPoint().x>(GEoptions.getNodeImg().getIconWidth()/2)&&evt.getPoint().y>(GEoptions.getNodeImg().getIconHeight()/2)){
+                nc.setPoint(evt.getPoint());
+                this.repaint();
+            }
         }else{
             //System.out.print("*");
             //Rectangle r = new Rectangle(evt.getX(), evt.getY(), 1, 1);
@@ -209,6 +225,13 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable{
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyReleased
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        //this.setPreferredSize(new Dimension(evt.getPoint().x+20,evt.getPoint().y+20));
+        Rectangle r = new Rectangle(evt.getX(), evt.getY(), 1, 1);
+        scrollRectToVisible(r);
+        //this.revalidate();
+    }//GEN-LAST:event_formMouseReleased
 
     @Override
     public Dimension getPreferredScrollableViewportSize() {
