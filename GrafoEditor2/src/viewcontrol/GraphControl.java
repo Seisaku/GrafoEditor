@@ -253,6 +253,7 @@ public class GraphControl {
             case addNode:
                 this.addNodeControl(this, P, S);
                 break;
+            case addEdge:
             case sel:
                 this.selected = null;
                 break;
@@ -331,7 +332,7 @@ public class GraphControl {
         } else if (selected.getClass() == NodeControl.class) {
             this.removeNodeControl((NodeControl) selected);
         }
-
+        this.selected = null;
     }
 
 

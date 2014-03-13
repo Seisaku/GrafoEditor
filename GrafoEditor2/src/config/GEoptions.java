@@ -13,15 +13,39 @@ import javax.swing.ImageIcon;
  * @author I839169
  */
 public class GEoptions {
-    private static Color selected = Color.RED;
-    private static Color hightlight = Color.GREEN;
+
+    private static Color defaultcolor = Color.BLACK;
+    private static Color selected = new Color(17,149, 29);//Color.ORANGE;
+    private static Color hightlight = Color.RED;
     private static int NodeDist = 40;
     private static int EdgeDist = 5;
     private static int ScrollMargin = 20;
-    private static ImageIcon NodeImg,NodeHL,NodeSel;
+    private static int ScrollSpeed = 7;
+    private static ImageIcon NodeImg, NodeHL, NodeSel;
+    private static ImageIcon NodeAzul, NodeAzulEscuro, NodeMarrom, NodeRosa,
+            NodeVerde, NodeVerdeEscuro, NodeVermelho, NodeAmarelo, NodeLaranja, NodePreto, NodeRoxo;
     private static String resourcePath = "/resource/";
     private static int zoomStep = 5;
 
+    
+    public static int getScrollSpeed() {
+        return ScrollSpeed;
+    }
+
+    public static void setScrollSpeed(int ScrollSpeed) {
+        GEoptions.ScrollSpeed = ScrollSpeed;
+    }
+    
+    public static Color getDefaultcolor() {
+        return defaultcolor;
+    }
+
+    public static void setDefaultcolor(Color defaultcolor) {
+        GEoptions.defaultcolor = defaultcolor;
+    }
+
+    
+    
     public static int getZoomStep() {
         return zoomStep;
     }
@@ -29,8 +53,6 @@ public class GEoptions {
     public static void setZoomStep(int zoomStep) {
         GEoptions.zoomStep = zoomStep;
     }
-    
-    
 
     public static int getScrollMargin() {
         return ScrollMargin;
@@ -46,12 +68,28 @@ public class GEoptions {
 
     public static void setResourcePath(String resourcePath) {
         GEoptions.resourcePath = resourcePath;
-    }        
-    
+    }
+
     public GEoptions() {
-        NodeImg = new ImageIcon(this.getClass().getResource("/resource/AzulEscuroG.png"));
-        NodeHL = new ImageIcon(this.getClass().getResource("/resource/VermelhaG.png"));
-        NodeSel = new ImageIcon(this.getClass().getResource("/resource/VerdeEscuroG.png"));
+
+        NodeAzul = new ImageIcon(this.getClass().getResource("/resource/Azul.png"));
+        NodeAzulEscuro = new ImageIcon(this.getClass().getResource("/resource/AzulEscuro.png"));
+        NodeMarrom = new ImageIcon(this.getClass().getResource("/resource/Marrom.png"));
+        NodeRosa = new ImageIcon(this.getClass().getResource("/resource/Rosa.png"));
+        NodeVerde = new ImageIcon(this.getClass().getResource("/resource/Verde.png"));
+        NodeVerdeEscuro = new ImageIcon(this.getClass().getResource("/resource/VerdeEscuro.png"));
+        NodeVermelho = new ImageIcon(this.getClass().getResource("/resource/Vermelho.png"));
+        NodeAmarelo = new ImageIcon(this.getClass().getResource("/resource/Amarelo.png"));
+        NodeLaranja = new ImageIcon(this.getClass().getResource("/resource/Laranja.png"));
+        NodePreto = new ImageIcon(this.getClass().getResource("/resource/Preto.png"));
+        NodeRoxo = new ImageIcon(this.getClass().getResource("/resource/Roxo.png"));
+
+//        NodeImg = new ImageIcon(this.getClass().getResource("/resource/AzulEscuroG.png"));
+//        NodeHL = new ImageIcon(this.getClass().getResource("/resource/VermelhaG.png"));
+//        NodeSel = new ImageIcon(this.getClass().getResource("/resource/VerdeEscuroG.png"));
+        NodeImg = NodeAzul;
+        NodeHL = NodeVermelho;
+        NodeSel = NodeVerdeEscuro;
     }
 
     public static ImageIcon getNodeImg() {
@@ -76,8 +114,8 @@ public class GEoptions {
 
     public static void setNodeSel(ImageIcon NodeSel) {
         GEoptions.NodeSel = NodeSel;
-    }    
-        
+    }
+
     /**
      * @return the selected
      */

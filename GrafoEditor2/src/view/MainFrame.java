@@ -20,6 +20,11 @@
 package view;
 
 import config.GEoptions;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import viewcontrol.GraphControl;
 
 /**
@@ -45,11 +50,18 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         new GEoptions();
         this.setVisible(true);
         this.GC = this.graphPaneContainer1.getGP().getGC();
         this.graphPaneContainer1.getGP().getGC().setMF(this);
         this.toolPanel1.setMF(this);
+        this.graphPaneContainer1.getGP().corrigeTamanho();
     }
 
     public void resetButtom() {
