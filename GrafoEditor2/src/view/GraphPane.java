@@ -108,9 +108,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
             if (nsel != null && this.GC.getMode() == mode.addEdge) {
                 g.setColor(GEoptions.getHightlight());
                 int xz = (int) (nsel.getPoint().x * z),
-                        yz = (int) (nsel.getPoint().y * z),
-                        xz2 = (int) (this.mouse.x),
-                        yz2 = (int) (this.mouse.y);
+                    yz = (int) (nsel.getPoint().y * z),
+                    xz2 = (int) (this.mouse.x * z),
+                    yz2 = (int) (this.mouse.y * z);
                 g.drawLine(xz, yz, xz2, yz2);
                 g.setColor(GEoptions.getDefaultcolor());
             }
