@@ -39,6 +39,41 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     private int buttommouse;
 
     /**
+     * Creates new form GraphPane
+     */
+    public GraphPane() {
+        initComponents();
+        this.showseletion = false;
+        this.selectionrect = new Rectangle(0,0,1,1);
+        this.mouse = new Point(0, 0);
+        this.GC = new GraphControl();
+        ActionKeyPressDel ad = new ActionKeyPressDel(this);
+        ActionKeyPressEsc ae = new ActionKeyPressEsc(this);
+        ActionKeyPressDown adown = new ActionKeyPressDown(this);
+        ActionKeyPressUp aup = new ActionKeyPressUp(this);
+        ActionKeyPressLeft aleft = new ActionKeyPressLeft(this);
+        ActionKeyPressRight aright = new ActionKeyPressRight(this);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DELETE"), "actiondelete");
+        this.getActionMap().put("actiondelete", ad);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "actionescape");
+        this.getActionMap().put("actionescape", ae);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "actiondown");
+        this.getActionMap().put("actiondown", adown);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "actionup");
+        this.getActionMap().put("actionup", aup);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "actionleft");
+        this.getActionMap().put("actionleft", aleft);
+        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "actionright");
+        this.getActionMap().put("actionright", aright);
+        setAutoscrolls(true);
+//        this.setBorder(new LineBorder(Color.black));
+        this.revalidate();
+        this.zoom = 0;
+        this.scrollrect = new Rectangle(0, 0, 1, 1);
+        this.selectionrect = new Rectangle(0, 0, 1, 1);
+        this.dragstartpoint = new Point(0, 0);
+    }
+    /**
      *
      * @return
      */
@@ -178,41 +213,6 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
         //g.drawString(getPointOri(getPointZoomed(mouse)).toString(), 6,45);
     }
 
-    /**
-     * Creates new form GraphPane
-     */
-    public GraphPane() {
-        initComponents();
-        this.showseletion = false;
-        this.selectionrect = new Rectangle(0,0,1,1);
-        this.mouse = new Point(0, 0);
-        this.GC = new GraphControl();
-        ActionKeyPressDel ad = new ActionKeyPressDel(this);
-        ActionKeyPressEsc ae = new ActionKeyPressEsc(this);
-        ActionKeyPressDown adown = new ActionKeyPressDown(this);
-        ActionKeyPressUp aup = new ActionKeyPressUp(this);
-        ActionKeyPressLeft aleft = new ActionKeyPressLeft(this);
-        ActionKeyPressRight aright = new ActionKeyPressRight(this);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DELETE"), "actiondelete");
-        this.getActionMap().put("actiondelete", ad);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "actionescape");
-        this.getActionMap().put("actionescape", ae);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "actiondown");
-        this.getActionMap().put("actiondown", adown);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "actionup");
-        this.getActionMap().put("actionup", aup);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "actionleft");
-        this.getActionMap().put("actionleft", aleft);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "actionright");
-        this.getActionMap().put("actionright", aright);
-        setAutoscrolls(true);
-//        this.setBorder(new LineBorder(Color.black));
-        this.revalidate();
-        this.zoom = 0;
-        this.scrollrect = new Rectangle(0, 0, 1, 1);
-        this.selectionrect = new Rectangle(0, 0, 1, 1);
-        this.dragstartpoint = new Point(0, 0);
-    }
 
     /**
      *
@@ -553,15 +553,15 @@ static class ActionKeyPressEsc extends AbstractAction {
 
         private GraphPane GP;
 
+        public ActionKeyPressDel(GraphPane GP) {
+            this.GP = GP;
+        }
+
         public GraphPane getGP() {
             return GP;
         }
 
         public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        public ActionKeyPressDel(GraphPane GP) {
             this.GP = GP;
         }
 
