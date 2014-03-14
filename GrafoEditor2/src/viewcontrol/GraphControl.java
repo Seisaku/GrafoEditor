@@ -16,7 +16,8 @@ import model.Node;
 import view.MainFrame;
 
 /**
- * Classe que cuida da interface entre o modelo Grafo e a GUI
+ * Classe que cuida da interface entre o modelo Grafo e a
+ * GUI
  *
  * @author Rafael
  */
@@ -24,7 +25,7 @@ public class GraphControl {
 
     private Graph Graph;
     private final ArrayList<NodeControl> NC;
-    private final ArrayList<EdgeControl> EC;    
+    private final ArrayList<EdgeControl> EC;
     private mode mode;
     private ItemControl selected;
     private MainFrame MF;
@@ -63,7 +64,7 @@ public class GraphControl {
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
         this.NC = new ArrayList<>();
-       
+
     }
 
     public mode getMode() {
@@ -74,6 +75,7 @@ public class GraphControl {
         if (mode == mode.sel) {
             this.MF.resetButtom();
         }
+
         this.mode = mode;
     }
 
@@ -159,7 +161,8 @@ public class GraphControl {
      * @param a primeiro nó em que a aresta incide
      * @param b segundo nó em que a aresta incide
      * @param w peso da aresta
-     * @param pse lista de pontos auxiliares para desenho da aresta
+     * @param pse lista de pontos auxiliares para desenho da
+     * aresta
      */
     public void addEdge(String n, Node a, Node b, int w, ArrayList<Point> pse) {
         Edge E = new Edge(n, a, b, w);
@@ -215,13 +218,13 @@ public class GraphControl {
             case addEdge:
 //                System.out.println("Case addEdge");
                 if (this.selected == null || this.selected.getClass() == EdgeControl.class) {
-                this.selected = N;
-            } else if (this.selected.getClass() == NodeControl.class) {
+                    this.selected = N;
+                } else if (this.selected.getClass() == NodeControl.class) {
 
-                NodeControl nc1 = (NodeControl) this.selected, nc2 = N;
+                    NodeControl nc1 = (NodeControl) this.selected, nc2 = N;
 //                    System.out.println("Aresta entre: "+nc1.getNode().getName()+" e "+nc2.getNode().getName());
-                this.addEdgeControl(this, nc1, nc2, S);
-            }
+                    this.addEdgeControl(this, nc1, nc2, S);
+                }
                 break;
 
         }
@@ -334,6 +337,5 @@ public class GraphControl {
         }
         this.selected = null;
     }
-
 
 }

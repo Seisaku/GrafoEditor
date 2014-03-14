@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class GEoptions {
 
     private static Color defaultcolor = Color.BLACK;
-    private static Color selected = new Color(17,149, 29);//Color.ORANGE;
+    private static Color selected = Color.ORANGE;//new Color(17,149, 29);
     private static Color hightlight = Color.RED;
     private static int NodeDist = 40;
     private static int EdgeDist = 5;
@@ -27,7 +27,6 @@ public class GEoptions {
     private static String resourcePath = "/resource/";
     private static int zoomStep = 5;
 
-    
     public static int getScrollSpeed() {
         return ScrollSpeed;
     }
@@ -35,7 +34,7 @@ public class GEoptions {
     public static void setScrollSpeed(int ScrollSpeed) {
         GEoptions.ScrollSpeed = ScrollSpeed;
     }
-    
+
     public static Color getDefaultcolor() {
         return defaultcolor;
     }
@@ -44,8 +43,6 @@ public class GEoptions {
         GEoptions.defaultcolor = defaultcolor;
     }
 
-    
-    
     public static int getZoomStep() {
         return zoomStep;
     }
@@ -89,7 +86,7 @@ public class GEoptions {
 //        NodeSel = new ImageIcon(this.getClass().getResource("/resource/VerdeEscuroG.png"));
         NodeImg = NodeAzul;
         NodeHL = NodeVermelho;
-        NodeSel = NodeVerdeEscuro;
+        NodeSel = NodeLaranja;
     }
 
     public static ImageIcon getNodeImg() {
