@@ -33,7 +33,10 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     private ItemControl Hightlighted;
     private Point mouse;
     private int zoom;
-    private Rectangle rect;
+    private Rectangle scrollrect, selectionrect;
+    private boolean showseletion;
+    private Point dragstartpoint;
+    private int buttommouse;
 
     public GraphControl getGC() {
         return GC;
@@ -108,9 +111,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
             if (nsel != null && this.GC.getMode() == mode.addEdge) {
                 g.setColor(GEoptions.getHightlight());
                 int xz = (int) (nsel.getPoint().x * z),
-                    yz = (int) (nsel.getPoint().y * z),
-                    xz2 = (int) (this.mouse.x * z),
-                    yz2 = (int) (this.mouse.y * z);
+                        yz = (int) (nsel.getPoint().y * z),
+                        xz2 = (int) (this.mouse.x * z),
+                        yz2 = (int) (this.mouse.y * z);
                 g.drawLine(xz, yz, xz2, yz2);
                 g.setColor(GEoptions.getDefaultcolor());
             }
@@ -139,10 +142,18 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
                 }
             }
         }
+        if(this.getGC().getMode()==mode.addNode){
+            imgWidth = (int) (GEoptions.getNodeHL().getIconHeight() * z);
+                    imgHeight = (int) (GEoptions.getNodeHL().getIconHeight() * z);
+                    zoomedIconHL = new ImageIcon(GEoptions.getNodeHL().getImage().getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH));
+                    zoomedIconHL.paintIcon(this, g, this.mouse.x - zoomedIconHL.getIconWidth() / 2, this.mouse.y - zoomedIconHL.getIconHeight() / 2);
+        }
         g.drawString(this.getZoom() * 100 + "%", this.getVisibleRect().x + 6, this.getVisibleRect().y + 15);
-        //g.drawRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+        if(this.showseletion){
+            g.drawRect(this.selectionrect.x, this.selectionrect.y, this.selectionrect.width, this.selectionrect.height);
+        }
         g.drawString(mouse.toString(), this.getVisibleRect().x + 6, this.getVisibleRect().y + 30);
-        g.drawString(dragstartpoint.toString(), this.getVisibleRect().x + 6, this.getVisibleRect().y + 45);
+        //g.drawString(dragstartpoint.toString(), this.getVisibleRect().x + 6, this.getVisibleRect().y + 45);
         //g.drawString(getPointZoomed(mouse).toString()+" "+this.getZoom()*100+"%", 6,30);
         //g.drawString(getPointOri(getPointZoomed(mouse)).toString(), 6,45);
     }
@@ -152,6 +163,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
      */
     public GraphPane() {
         initComponents();
+        this.showseletion = false;
         this.mouse = new Point(0, 0);
         this.GC = new GraphControl();
         ActionKeyPressDel ad = new ActionKeyPressDel(this);
@@ -176,7 +188,8 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
 //        this.setBorder(new LineBorder(Color.black));
         this.revalidate();
         this.zoom = 0;
-        this.rect = new Rectangle(0, 0, 1, 1);
+        this.scrollrect = new Rectangle(0, 0, 1, 1);
+        this.selectionrect = new Rectangle(0, 0, 1, 1);
         this.dragstartpoint = new Point(0, 0);
     }
 
@@ -212,6 +225,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
             }
         });
         addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
@@ -271,21 +287,29 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     }
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        this.showseletion = true;
         this.corrigeTamanho();
-        int widght, height;        
-        if (this.buttommouse == MouseEvent.BUTTON3) {
-            widght = dragstartpoint.x-evt.getX();
-            height = dragstartpoint.y-evt.getY();            
-            rect = new Rectangle(this.getVisibleRect());
-            rect.translate(widght, height);
+        int widght, height;
+        int x,y;
+        x = evt.getX() < dragstartpoint.x ? evt.getX() : dragstartpoint.x;
+        y = evt.getY() < dragstartpoint.y ? evt.getY() : dragstartpoint.y;
+        widght = dragstartpoint.x - evt.getX();
+        height = dragstartpoint.y - evt.getY();
+        if (this.buttommouse == MouseEvent.BUTTON1) {
+            selectionrect = new Rectangle(x, y, Math.abs(widght), Math.abs(height));
+        } else if (this.buttommouse == MouseEvent.BUTTON3) {
+
+            scrollrect = new Rectangle(this.getVisibleRect());
+            scrollrect.translate(widght, height);
         } else {
-            rect.setLocation(evt.getX() + (GEoptions.getNodeImg().getIconWidth() / 2),
+            scrollrect.setLocation(evt.getX() + (GEoptions.getNodeImg().getIconWidth() / 2),
                     evt.getY() + (GEoptions.getNodeImg().getIconHeight() / 2));
         }
-        scrollRectToVisible(rect);
+        scrollRectToVisible(scrollrect);
         this.revalidate();
         this.repaint();
         if (this.Hightlighted != null && this.Hightlighted.getClass() == NodeControl.class) {
+            this.showseletion = false;
             NodeControl nc = (NodeControl) this.Hightlighted;
             if (this.getPointOri(evt.getPoint()).x > (GEoptions.getNodeImg().getIconWidth() / 2) && this.getPointOri(evt.getPoint()).y > (GEoptions.getNodeImg().getIconHeight() / 2)) {//Impede que Node seja movido para uma coordenada fora da tela
                 nc.setPoint(this.getPointOri(evt.getPoint()));
@@ -295,7 +319,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     }//GEN-LAST:event_formMouseDragged
 
     private void scroll(int dir, int speed) {
-        Rectangle rect = new Rectangle(0, 0, 1, 1);
+        scrollrect = new Rectangle(0, 0, 1, 1);
         int x = 0, y = 0;
         switch (dir) {
             case 1: //up
@@ -315,8 +339,8 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
                 y = this.getVisibleRect().y;
                 break;
         }
-        rect.setLocation(x, y);
-        scrollRectToVisible(rect);
+        scrollrect.setLocation(x, y);
+        scrollRectToVisible(scrollrect);
         this.repaint();
     }
 
@@ -335,13 +359,18 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
             //TODO scroll up/down
         }
     }//GEN-LAST:event_formMouseWheelMoved
-    private Point dragstartpoint;
-    private int buttommouse;
+
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         dragstartpoint = evt.getPoint();
         this.buttommouse = evt.getButton();
+        
 //        System.out.println("d"+dragstartpoint);
     }//GEN-LAST:event_formMousePressed
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        this.showseletion = false;
+        this.repaint();
+    }//GEN-LAST:event_formMouseReleased
 
     @Override
     public Dimension getPreferredScrollableViewportSize() {
