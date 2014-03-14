@@ -9,6 +9,7 @@ package viewcontrol;
  *
  */
 public enum mode {
-    addNode, addEdge, remNode, remEdge, sel
-    
+
+    sel, addNode, addEdge, remNode, remEdge
+
 }

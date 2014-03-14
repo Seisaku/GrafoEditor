@@ -13,14 +13,9 @@ import java.util.Iterator;
 import model.Edge;
 import model.Graph;
 import model.Node;
+import view.GraphPane;
 import view.MainFrame;
 
-/**
- * Classe que cuida da interface entre o modelo Grafo e a
- * GUI
- *
- * @author Rafael
- */
 public class GraphControl {
 
     private Graph Graph;
@@ -29,6 +24,15 @@ public class GraphControl {
     private mode mode;
     private ItemControl selected;
     private MainFrame MF;
+    private GraphPane GP;
+
+    public GraphPane getGP() {
+        return GP;
+    }
+
+    public void setGP(GraphPane GP) {
+        this.GP = GP;
+    }
 
     public MainFrame getMF() {
         return MF;
@@ -59,12 +63,12 @@ public class GraphControl {
         this.selected = selected;
     }
 
-    public GraphControl() {
+    public GraphControl(GraphPane GP) {
         this.mode = mode.sel;
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
         this.NC = new ArrayList<>();
-
+        this.GP = GP;
     }
 
     public mode getMode() {
@@ -231,15 +235,15 @@ public class GraphControl {
 
     }
 
-    public void GCnotify(ItemControl I, boolean S) {
+    public void GCnotify(ItemControl I) {
         if (I.getClass() == EdgeControl.class) {
-            this.GCnotify((EdgeControl) I, S);
+            this.GCnotify((EdgeControl) I);
         } else {
-            this.GCnotify((NodeControl) I, S);
+            this.GCnotify((NodeControl) I, this.getGP().isShiftStatus());
         }
     }
 
-    public void GCnotify(EdgeControl E, boolean S) {
+    public void GCnotify(EdgeControl E) {
         switch (mode) {
             case remEdge:
                 this.removeEdgeControl(E);
@@ -251,10 +255,10 @@ public class GraphControl {
         }
     }
 
-    public void GCnotify(Point P, boolean S) {
+    public void GCnotify(Point P) {
         switch (mode) {
             case addNode:
-                this.addNodeControl(this, P, S);
+                this.addNodeControl(this, P, this.getGP().isShiftStatus());
                 break;
             case addEdge:
             case sel:

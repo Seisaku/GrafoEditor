@@ -56,13 +56,29 @@ public class MainFrame extends javax.swing.JFrame {
         }
         new GEoptions();
         this.setVisible(true);
-        this.GC = this.graphPaneContainer1.getGP().getGC();
-        this.graphPaneContainer1.getGP().getGC().setMF(this);
-        this.toolPanel1.setMF(this);
+        this.GC = this.graphPaneContainer.getGP().getGC();
+        this.graphPaneContainer.getGP().getGC().setMF(this);
+        this.toolPanel.setMF(this);
+    }
+
+    public ToolPanel getToolPanel() {
+        return this.toolPanel;
+    }
+
+    public NavPanel getNavPanel() {
+        return this.navPanel;
+    }
+
+    public MatrixPanel getMatrixPanel() {
+        return this.matrixPanel;
+    }
+
+    public PropertiesPanel getPropertiesPanel() {
+        return propertiesPanel;
     }
 
     public void resetButtom() {
-        this.toolPanel1.resetButtom();
+        this.toolPanel.resetButtom();
     }
 
     /**
@@ -80,16 +96,20 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         CenterPanel = new javax.swing.JPanel();
-        graphPaneContainer1 = new view.GraphPaneContainer();
+        graphPaneContainer = new view.GraphPaneContainer();
         NorthPanel = new javax.swing.JPanel();
-        toolPanel1 = new view.ToolPanel();
+        toolPanel = new view.ToolPanel();
         SouthPanel = new javax.swing.JPanel();
+        msgPanel1 = new view.MsgPanel();
         EastPanel = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
-        propertiesPanel1 = new view.PropertiesPanel();
-        navPanel1 = new view.NavPanel();
+        propertiesPanel = new view.PropertiesPanel();
+        navPanel = new view.NavPanel();
         WestPanel = new javax.swing.JPanel();
-        matrixPanel1 = new view.MatrixPanel();
+        matrixPanel = new view.MatrixPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -104,16 +124,14 @@ public class MainFrame extends javax.swing.JFrame {
         PopupMenu.add(jMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(600, 600));
-        setPreferredSize(new java.awt.Dimension(1000, 600));
 
         jLayeredPane1.setLayout(new java.awt.BorderLayout());
 
         CenterPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CenterPanel.setPreferredSize(new java.awt.Dimension(100, 200));
         CenterPanel.setLayout(new java.awt.BorderLayout());
-        CenterPanel.add(graphPaneContainer1, java.awt.BorderLayout.CENTER);
+        CenterPanel.add(graphPaneContainer, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(CenterPanel, java.awt.BorderLayout.CENTER);
 
@@ -121,7 +139,7 @@ public class MainFrame extends javax.swing.JFrame {
         NorthPanel.setMinimumSize(new java.awt.Dimension(322, 40));
         NorthPanel.setPreferredSize(new java.awt.Dimension(780, 40));
         NorthPanel.setLayout(new java.awt.BorderLayout());
-        NorthPanel.add(toolPanel1, java.awt.BorderLayout.CENTER);
+        NorthPanel.add(toolPanel, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(NorthPanel, java.awt.BorderLayout.NORTH);
 
@@ -129,6 +147,8 @@ public class MainFrame extends javax.swing.JFrame {
         SouthPanel.setMinimumSize(new java.awt.Dimension(2, 40));
         SouthPanel.setPreferredSize(new java.awt.Dimension(888, 40));
         SouthPanel.setLayout(new java.awt.BorderLayout());
+        SouthPanel.add(msgPanel1, java.awt.BorderLayout.CENTER);
+
         jLayeredPane1.add(SouthPanel, java.awt.BorderLayout.SOUTH);
 
         EastPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -137,8 +157,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSplitPane1.setDividerLocation(150);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setRightComponent(propertiesPanel1);
-        jSplitPane1.setLeftComponent(navPanel1);
+        jSplitPane1.setRightComponent(propertiesPanel);
+        jSplitPane1.setLeftComponent(navPanel);
 
         EastPanel.add(jSplitPane1);
 
@@ -147,11 +167,19 @@ public class MainFrame extends javax.swing.JFrame {
         WestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         WestPanel.setPreferredSize(new java.awt.Dimension(150, 200));
         WestPanel.setLayout(new java.awt.BorderLayout());
-        WestPanel.add(matrixPanel1, java.awt.BorderLayout.CENTER);
+        WestPanel.add(matrixPanel, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(WestPanel, java.awt.BorderLayout.LINE_START);
 
         getContentPane().add(jLayeredPane1, java.awt.BorderLayout.CENTER);
+
+        jMenu2.setText("Arquivo");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Editar");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -202,14 +230,18 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu PopupMenu;
     private javax.swing.JPanel SouthPanel;
     private javax.swing.JPanel WestPanel;
-    private view.GraphPaneContainer graphPaneContainer1;
+    private view.GraphPaneContainer graphPaneContainer;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSplitPane jSplitPane1;
-    private view.MatrixPanel matrixPanel1;
-    private view.NavPanel navPanel1;
-    private view.PropertiesPanel propertiesPanel1;
-    private view.ToolPanel toolPanel1;
+    private view.MatrixPanel matrixPanel;
+    private view.MsgPanel msgPanel1;
+    private view.NavPanel navPanel;
+    private view.PropertiesPanel propertiesPanel;
+    private view.ToolPanel toolPanel;
     // End of variables declaration//GEN-END:variables
 }

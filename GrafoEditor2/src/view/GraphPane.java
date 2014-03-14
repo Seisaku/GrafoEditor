@@ -11,13 +11,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
-import javax.swing.KeyStroke;
 import javax.swing.Scrollable;
 import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
@@ -35,6 +32,8 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
     private boolean showseletion;
     private Point dragstartpoint;
     private int buttommouse;
+    private boolean shiftStatus;
+    private boolean ctrilStatus;
 
     /**
      * Creates new form GraphPane
@@ -44,25 +43,25 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
         this.showseletion = false;
         this.selectionrect = new Rectangle(0, 0, 1, 1);
         this.mouse = new Point(0, 0);
-        this.GC = new GraphControl();
-        ActionKeyPressDel ad = new ActionKeyPressDel(this);
-        ActionKeyPressEsc ae = new ActionKeyPressEsc(this);
-        ActionKeyPressDown adown = new ActionKeyPressDown(this);
-        ActionKeyPressUp aup = new ActionKeyPressUp(this);
-        ActionKeyPressLeft aleft = new ActionKeyPressLeft(this);
-        ActionKeyPressRight aright = new ActionKeyPressRight(this);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DELETE"), "actiondelete");
-        this.getActionMap().put("actiondelete", ad);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "actionescape");
-        this.getActionMap().put("actionescape", ae);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "actiondown");
-        this.getActionMap().put("actiondown", adown);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "actionup");
-        this.getActionMap().put("actionup", aup);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "actionleft");
-        this.getActionMap().put("actionleft", aleft);
-        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "actionright");
-        this.getActionMap().put("actionright", aright);
+        this.GC = new GraphControl(this);
+//        ActionKeyPressDel ad = new ActionKeyPressDel(this);
+//        ActionKeyPressEsc ae = new ActionKeyPressEsc(this);
+//        ActionKeyPressDown adown = new ActionKeyPressDown(this);
+//        ActionKeyPressUp aup = new ActionKeyPressUp(this);
+//        ActionKeyPressLeft aleft = new ActionKeyPressLeft(this);
+//        ActionKeyPressRight aright = new ActionKeyPressRight(this);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DELETE"), "actiondelete");
+//        this.getActionMap().put("actiondelete", ad);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"), "actionescape");
+//        this.getActionMap().put("actionescape", ae);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "actiondown");
+//        this.getActionMap().put("actiondown", adown);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "actionup");
+//        this.getActionMap().put("actionup", aup);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "actionleft");
+//        this.getActionMap().put("actionleft", aleft);
+//        this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "actionright");
+//        this.getActionMap().put("actionright", aright);
         setAutoscrolls(true);
         this.addKeyListener(this);
         this.setFocusable(true);
@@ -71,6 +70,22 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
         this.scrollrect = new Rectangle(0, 0, 1, 1);
         this.selectionrect = new Rectangle(0, 0, 1, 1);
         this.dragstartpoint = new Point(0, 0);
+    }
+
+    public boolean isShiftStatus() {
+        return shiftStatus;
+    }
+
+    public void setShiftStatus(boolean shiftStatus) {
+        this.shiftStatus = shiftStatus;
+    }
+
+    public boolean isCtrilStatus() {
+        return ctrilStatus;
+    }
+
+    public void setCtrilStatus(boolean ctrilStatus) {
+        this.ctrilStatus = ctrilStatus;
     }
 
     /**
@@ -175,10 +190,8 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
 
             for (int i = 0; i < GC.getNCsize(); i++) {
                 nc = this.GC.getNC(i);
-                //g.drawOval(nc.getPoint().x, nc.getPoint().y, 5, 5);
-
-                x = (int) ((this.getPointZoomed(nc.getPoint()).x));// - (GEoptions.getNodeSel().getIconWidth() / 2)));
-                y = (int) ((this.getPointZoomed(nc.getPoint()).y));// - (GEoptions.getNodeSel().getIconHeight() / 2)));
+                x = this.getPointZoomed(nc.getPoint()).x;
+                y = this.getPointZoomed(nc.getPoint()).y;
                 if (nsel == nc) {
                     imgWidth = (int) (GEoptions.getNodeSel().getIconHeight() * z);
                     imgHeight = (int) (GEoptions.getNodeSel().getIconHeight() * z);
@@ -294,9 +307,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         this.grabFocus();
         if (this.Hightlighted != null) {
-            this.GC.GCnotify(Hightlighted, evt.isShiftDown());
+            this.GC.GCnotify(Hightlighted);
         } else {
-            this.GC.GCnotify(this.getPointOri(evt.getPoint()), evt.isShiftDown());
+            this.GC.GCnotify(this.getPointOri(evt.getPoint()));
         }
         this.repaint();
 
@@ -462,13 +475,37 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
 
         switch (e.getKeyCode()) {
             case 16:
-                System.out.println("Shift");
+                this.shiftStatus = true;
                 break;
             case 17:
-                System.out.println("Ctrl");
+                this.ctrilStatus = true;
                 break;
             case 18:
                 System.out.println("Alt");
+                break;
+            case 38:
+//                System.out.println("UP");
+                this.scroll(1, GEoptions.getScrollSpeed());
+                break;
+            case 40:
+//                System.out.println("DOWN");
+                this.scroll(2, GEoptions.getScrollSpeed());
+                break;
+            case 37:
+//                System.out.println("LEFT");
+                this.scroll(3, GEoptions.getScrollSpeed());
+                break;
+            case 39:
+//                System.out.println("RIGHT");
+                this.scroll(4, GEoptions.getScrollSpeed());
+                break;
+            case 127:
+//                System.out.println("DEL");
+                this.delAction();
+                break;
+            case 27:
+//                System.out.println("ESC");
+                this.escAction();
                 break;
             case 65:
 //                System.out.println("A");
@@ -477,178 +514,75 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
             case 86:
 //                System.out.println("V");
                 this.GC.setMode(mode.addNode);
+
                 break;
             default:
                 System.out.println(e.getKeyCode());
         }
+        this.atualizaDisplay();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case 16:
-                System.out.println("Shift");
+                this.shiftStatus = false;
+                if (this.getGC().getMode() == mode.addEdge || this.getGC().getMode() == mode.addNode) {
+                    this.getGC().setMode(mode.sel);
+                }
                 break;
             case 17:
-                System.out.println("Ctrl");
+                this.ctrilStatus = false;
                 break;
             case 18:
-                System.out.println("Alt");
+//                System.out.println("Alt");
+                break;
+            case 38:
+//                System.out.println("UP");
+                break;
+            case 40:
+//                System.out.println("DOWN");
+                break;
+            case 37:
+//                System.out.println("LEFT");
+                break;
+            case 39:
+//                System.out.println("RIGHT");
+                break;
+            case 127:
+//                System.out.println("DEL");
+                break;
+            case 27:
+//                System.out.println("ESC");
                 break;
             case 65:
-                System.out.println("A");
+//                System.out.println("A");
                 break;
             case 86:
-                System.out.println("V");
+//                System.out.println("V");
                 break;
             default:
                 System.out.println(e.getKeyCode());
         }
+        this.atualizaDisplay();
     }
 
+    private void delAction() {
+        if (this.getGC().getSelected() != null) {
+            this.getGC().removeItem(this.getGC().getSelected());
+            this.atualizaDisplay();
+        } else {
+            System.out.println("No selection");
+        }
+
+    }
+
+    private void escAction() {
+        this.getGC().setSelected(null);
+        this.getGC().setMode(mode.sel);
+        this.atualizaDisplay();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    static class ActionKeyPressEsc extends AbstractAction {
-
-        private GraphPane GP;
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        public ActionKeyPressEsc(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GP.getGC().setSelected(null);
-            GP.getGC().setMode(mode.sel);
-            GP.repaint();
-        }
-
-    }
-
-    static class ActionKeyPressDown extends AbstractAction {
-
-        private GraphPane GP;
-
-        private ActionKeyPressDown(GraphPane gp) {
-            this.GP = gp;
-        }
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GP.scroll(2, GEoptions.getScrollSpeed());
-        }
-    }
-
-    static class ActionKeyPressLeft extends AbstractAction {
-
-        private GraphPane GP;
-
-        private ActionKeyPressLeft(GraphPane gp) {
-            this.GP = gp;
-        }
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GP.scroll(3, GEoptions.getScrollSpeed());
-        }
-    }
-
-    static class ActionKeyPressRight extends AbstractAction {
-
-        private GraphPane GP;
-
-        private ActionKeyPressRight(GraphPane gp) {
-            this.GP = gp;
-        }
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GP.scroll(4, GEoptions.getScrollSpeed());
-        }
-    }
-
-    static class ActionKeyPressUp extends AbstractAction {
-
-        private GraphPane GP;
-
-        private ActionKeyPressUp(GraphPane gp) {
-            this.GP = gp;
-        }
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GP.scroll(1, GEoptions.getScrollSpeed());
-        }
-    }
-
-    static class ActionKeyPressDel extends AbstractAction {
-
-        private GraphPane GP;
-
-        public ActionKeyPressDel(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        public GraphPane getGP() {
-            return GP;
-        }
-
-        public void setGP(GraphPane GP) {
-            this.GP = GP;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (this.GP.getGC().getSelected() != null) {
-                //System.out.println(this.GP.getGC().getSelected());
-                this.GP.getGC().removeItem(this.GP.getGC().getSelected());
-                GP.repaint();
-            } else {
-                System.out.println("No selection");
-            }
-
-        }
-
-    }
 
 }
