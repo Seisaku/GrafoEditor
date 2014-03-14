@@ -184,6 +184,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     public GraphPane() {
         initComponents();
         this.showseletion = false;
+        this.selectionrect = new Rectangle(0,0,1,1);
         this.mouse = new Point(0, 0);
         this.GC = new GraphControl();
         ActionKeyPressDel ad = new ActionKeyPressDel(this);
@@ -228,6 +229,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
 
     /**
      * Recupera o ponto real dado um ponto afetado por zoom
+     *
      * @param zoomed
      * @return
      */
@@ -304,8 +306,9 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
     }//GEN-LAST:event_formMouseMoved
 
     /**
-     * Procura o último vertice (Mais distânte da origem da área de desenho) e garante que a área de desenho tenha o
-     * tamanho adequado para abrigar o grafo inteiro
+     * Procura o último vertice (Mais distânte da origem da área de desenho) e
+     * garante que a área de desenho tenha o tamanho adequado para abrigar o
+     * grafo inteiro
      */
     public void corrigeTamanho() {
         Point lp = this.getPointZoomed(this.getGC().getLastPoint());
@@ -331,19 +334,18 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
         height = dragstartpoint.y - evt.getY();
         if (this.buttommouse == MouseEvent.BUTTON1) {
             selectionrect = new Rectangle(x, y, Math.abs(widght), Math.abs(height));
-        } else if (this.buttommouse == MouseEvent.BUTTON3) {
-
-            scrollrect = new Rectangle(this.getVisibleRect());
-            scrollrect.translate(widght, height);
-        } else {
             scrollrect.setLocation(evt.getX() + (GEoptions.getNodeImg().getIconWidth() / 2),
                     evt.getY() + (GEoptions.getNodeImg().getIconHeight() / 2));
+        } else if (this.buttommouse == MouseEvent.BUTTON3) {
+            scrollrect = new Rectangle(this.getVisibleRect());
+            scrollrect.translate(widght, height);
         }
         scrollRectToVisible(scrollrect);
         this.revalidate();
         this.repaint();
         if (this.Hightlighted != null && this.Hightlighted.getClass() == NodeControl.class) {
             this.showseletion = false;
+            this.selectionrect = new Rectangle(0,0,1,1);
             NodeControl nc = (NodeControl) this.Hightlighted;
             if (this.getPointOri(evt.getPoint()).x > (GEoptions.getNodeImg().getIconWidth() / 2) && this.getPointOri(evt.getPoint()).y > (GEoptions.getNodeImg().getIconHeight() / 2)) {//Impede que Node seja movido para uma coordenada fora da tela
                 nc.setPoint(this.getPointOri(evt.getPoint()));
@@ -403,6 +405,7 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         this.showseletion = false;
+        this.selectionrect = new Rectangle(0,0,1,1);
         this.repaint();
     }//GEN-LAST:event_formMouseReleased
 
