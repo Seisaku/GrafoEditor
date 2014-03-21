@@ -15,6 +15,8 @@ public abstract class ItemControl {
      *
      */
     private boolean selected;
+    
+    public abstract String getName();
 
     public boolean isSelected() {
         return selected;

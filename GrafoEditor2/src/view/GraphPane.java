@@ -15,7 +15,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JToolTip;
 import javax.swing.Scrollable;
+import javax.swing.ToolTipManager;
 import viewcontrol.EdgeControl;
 import viewcontrol.GraphControl;
 import viewcontrol.ItemControl;
@@ -70,7 +72,22 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
         this.scrollrect = new Rectangle(0, 0, 1, 1);
         this.selectionrect = new Rectangle(0, 0, 1, 1);
         this.dragstartpoint = new Point(0, 0);
+        this.setToolTipText("GraphPane");
+//        JToolTip JT = this.createToolTip();
+//        JT.setTipText("GP");
+//        JT.setComponent(this);
+//        JT.setVisible(true);
     }
+  
+
+    @Override
+    public JToolTip createToolTip() {
+        JToolTip jt = super.createToolTip();
+        ToolTipManager.sharedInstance().setDismissDelay(1000000);        
+        return jt;
+    }
+    
+    
 
     public boolean isShiftStatus() {
         return shiftStatus;
@@ -321,8 +338,14 @@ public class GraphPane extends javax.swing.JPanel implements Scrollable, KeyList
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         this.Hightlighted = this.GC.searchPoint(this.getPointOri(evt.getPoint()));
-        this.mouse = this.getPointOri(evt.getPoint());
+        if(this.Hightlighted!=null){
+            ToolTipManager.sharedInstance().setEnabled(true);
+            this.setToolTipText(Hightlighted.getName());
+        }else{
+                ToolTipManager.sharedInstance().setEnabled(false);
+        }
         
+        this.mouse = this.getPointOri(evt.getPoint());        
         this.repaint();
     }//GEN-LAST:event_formMouseMoved
 

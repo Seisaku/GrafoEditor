@@ -86,4 +86,9 @@ public class EdgeControl extends ItemControl {
         return "EdgeControl{" + this.Edge + '}';
     }
 
+    @Override
+    public String getName() {
+        return this.Edge.getName();
+    }
+
 }

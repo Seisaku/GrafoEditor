@@ -86,5 +86,10 @@ public class NodeControl extends ItemControl {
         this.Point = new Point(x, y);
     }
 
+    @Override
+    public String getName() {
+        return this.Node.getName();
+    }
+
     
 }
