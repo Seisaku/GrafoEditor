@@ -77,6 +77,10 @@ public class MainFrame extends javax.swing.JFrame {
         return propertiesPanel;
     }
 
+    public MsgPanel getMsgPanel() {
+        return msgPanel;
+    }
+
     public void resetButtom() {
         this.toolPanel.resetButtom();
     }
@@ -100,13 +104,13 @@ public class MainFrame extends javax.swing.JFrame {
         NorthPanel = new javax.swing.JPanel();
         toolPanel = new view.ToolPanel();
         SouthPanel = new javax.swing.JPanel();
-        msgPanel1 = new view.MsgPanel();
+        msgPanel = new view.MsgPanel();
         EastPanel = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         propertiesPanel = new view.PropertiesPanel();
-        navPanel = new view.NavPanel();
-        WestPanel = new javax.swing.JPanel();
         matrixPanel = new view.MatrixPanel();
+        WestPanel = new javax.swing.JPanel();
+        navPanel = new view.NavPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -147,7 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
         SouthPanel.setMinimumSize(new java.awt.Dimension(2, 40));
         SouthPanel.setPreferredSize(new java.awt.Dimension(888, 40));
         SouthPanel.setLayout(new java.awt.BorderLayout());
-        SouthPanel.add(msgPanel1, java.awt.BorderLayout.CENTER);
+        SouthPanel.add(msgPanel, java.awt.BorderLayout.CENTER);
 
         jLayeredPane1.add(SouthPanel, java.awt.BorderLayout.SOUTH);
 
@@ -158,7 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(150);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setRightComponent(propertiesPanel);
-        jSplitPane1.setLeftComponent(navPanel);
+        jSplitPane1.setLeftComponent(matrixPanel);
 
         EastPanel.add(jSplitPane1);
 
@@ -166,8 +170,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         WestPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         WestPanel.setPreferredSize(new java.awt.Dimension(150, 200));
-        WestPanel.setLayout(new java.awt.BorderLayout());
-        WestPanel.add(matrixPanel, java.awt.BorderLayout.CENTER);
+        WestPanel.setLayout(new javax.swing.BoxLayout(WestPanel, javax.swing.BoxLayout.LINE_AXIS));
+        WestPanel.add(navPanel);
 
         jLayeredPane1.add(WestPanel, java.awt.BorderLayout.LINE_START);
 
@@ -239,7 +243,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSplitPane jSplitPane1;
     private view.MatrixPanel matrixPanel;
-    private view.MsgPanel msgPanel1;
+    private view.MsgPanel msgPanel;
     private view.NavPanel navPanel;
     private view.PropertiesPanel propertiesPanel;
     private view.ToolPanel toolPanel;

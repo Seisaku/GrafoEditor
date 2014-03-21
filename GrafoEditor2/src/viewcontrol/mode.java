@@ -10,6 +10,21 @@ package viewcontrol;
  */
 public enum mode {
 
-    sel, addNode, addEdge, remNode, remEdge
+    sel, addNode, addEdge, remNode, remEdge;
+
+    static {
+        sel.msg = "Modo Selecionar";
+        addNode.msg = "Adicionar Vértice";
+        addEdge.msg = "Adicionar Aresta";
+        remNode.msg = "Remover Vértice";
+        remEdge.msg = "Remover Aresta";
+
+    }
+
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
 
 }

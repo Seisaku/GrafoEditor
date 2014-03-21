@@ -7,6 +7,7 @@ package viewcontrol;
 
 import config.GEoptions;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +22,7 @@ public class GraphControl {
     private Graph Graph;
     private final ArrayList<NodeControl> NC;
     private final ArrayList<EdgeControl> EC;
+    private final ArrayList<ItemControl> seletionGroup;
     private mode mode;
     private ItemControl selected;
     private MainFrame MF;
@@ -68,9 +70,35 @@ public class GraphControl {
         this.Graph = new Graph(null);
         this.EC = new ArrayList<>();
         this.NC = new ArrayList<>();
+        this.seletionGroup = new ArrayList<>();
         this.GP = GP;
     }
 
+    public boolean isGroupSelected(ItemControl i){
+        return this.seletionGroup.contains(i);
+    }
+    
+    public ArrayList<ItemControl> getSelectionGroup(){
+        return new ArrayList<>(this.seletionGroup);
+    }
+    
+    public void selectRect(Rectangle r){
+        if(!this.GP.isShiftStatus()){
+            this.seletionGroup.clear();
+        }
+        for (NodeControl nc : NC) {
+            if(r.contains(nc.getPoint())){
+                this.seletionGroup.add(nc);
+            }
+        }
+        for (EdgeControl ec : EC) {
+            if(r.contains(ec.getA().getPoint())||r.contains(ec.getB().getPoint())){
+                this.seletionGroup.add(ec);
+            }
+        }
+        
+    }
+    
     public mode getMode() {
         return mode;
     }
@@ -79,7 +107,7 @@ public class GraphControl {
         if (mode == mode.sel) {
             this.MF.resetButtom();
         }
-
+        this.MF.getMsgPanel().setMsg(mode.getMsg());
         this.mode = mode;
     }
 
@@ -216,7 +244,12 @@ public class GraphControl {
                 break;
             case sel:
 //                System.out.println("Case sel");
+                
+                if(!S){
+                    this.seletionGroup.clear();
+                }
                 this.selected = N;
+                this.seletionGroup.add(N);
 //                System.out.println(N.getNode().getName()+" selecionado");
                 break;
             case addEdge:

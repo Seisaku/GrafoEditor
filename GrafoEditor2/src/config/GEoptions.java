@@ -17,6 +17,7 @@ public class GEoptions {
     private static Color defaultcolor = Color.BLACK;
     private static Color selected = Color.ORANGE;//new Color(17,149, 29);
     private static Color hightlight = Color.RED;
+    private static Color selRect = new Color(0, 0, 255, 30);
     private static int NodeDist = 40;
     private static int EdgeDist = 5;
     private static int ScrollMargin = 20;
@@ -27,6 +28,14 @@ public class GEoptions {
     private static String resourcePath = "/resource/";
     private static int zoomStep = 5;
 
+    public static Color getSelRect() {
+        return selRect;
+    }
+
+    public static void setSelRect(Color selRect) {
+        GEoptions.selRect = selRect;
+    }    
+    
     public static int getScrollSpeed() {
         return ScrollSpeed;
     }
