@@ -9,45 +9,21 @@ import java.awt.Point;
 import java.util.ArrayList;
 import model.Node;
 
-/**
- *
- * @author Rafael
- */
 public class NodeControl extends ItemControl {
 
     private Node Node;
-    private Point Point;
+    private Point Point, DrawPoint;
     private GraphControl GC;
     private final ArrayList<EdgeControl> EC;
 
-    public void addEC(EdgeControl ec){
-        this.EC.add(ec);
-    }
-    
-    public ArrayList<EdgeControl> getEC(){
-        return new ArrayList<>(EC);
-    }
-    
-    public boolean removeEC(EdgeControl ec){
-        return EC.remove(ec);
-    }
-    
-    public GraphControl getGC() {
-        return GC;
-    }
-
-    public void setGC(GraphControl GC) {
-        this.GC = GC;
-    }
-
-    NodeControl(){
+    NodeControl() {
         EC = new ArrayList<>();
     }
-    
+
     NodeControl(Node N) {
         this();
         this.Node = N;
-        
+
     }
 
     public NodeControl(Node Node, Point Point) {
@@ -56,8 +32,43 @@ public class NodeControl extends ItemControl {
         this.Point = Point;
     }
 
+    public Point getDrawPoint() {
+        if (DrawPoint == null) {
+            DrawPoint = this.Point;
+        }
+        return DrawPoint;
+    }
+
+    public void setDrawPoint(Point DrawPoint) {
+        this.DrawPoint = DrawPoint;
+    }
+
+    public void addEC(EdgeControl ec) {
+        this.EC.add(ec);
+    }
+
+    public ArrayList<EdgeControl> getEC() {
+        return new ArrayList<>(EC);
+    }
+
+    public boolean removeEC(EdgeControl ec) {
+        return EC.remove(ec);
+    }
+
+    public GraphControl getGC() {
+        return GC;
+    }
+
+    public void setGC(GraphControl GC) {
+        this.GC = GC;
+    }
+
     public Point getPoint() {
         return Point;
+    }
+
+    public void atualizaPoint() {
+        this.Point = this.getDrawPoint();
     }
 
     public void setPoint(Point Point) {
@@ -91,5 +102,4 @@ public class NodeControl extends ItemControl {
         return this.Node.getName();
     }
 
-    
 }

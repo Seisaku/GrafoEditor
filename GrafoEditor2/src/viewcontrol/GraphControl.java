@@ -74,31 +74,45 @@ public class GraphControl {
         this.GP = GP;
     }
 
-    public boolean isGroupSelected(ItemControl i){
+    public boolean isGroupSelected(ItemControl i) {
         return this.seletionGroup.contains(i);
     }
-    
-    public ArrayList<ItemControl> getSelectionGroup(){
+
+    public ArrayList<ItemControl> getSelectionGroup() {
         return new ArrayList<>(this.seletionGroup);
     }
-    
-    public void selectRect(Rectangle r){
-        if(!this.GP.isShiftStatus()){
+
+    public void selectRect(Rectangle r) {
+        if (!this.GP.isShiftStatus()) {
             this.seletionGroup.clear();
         }
         for (NodeControl nc : NC) {
-            if(r.contains(nc.getPoint())){
+            if (r.contains(nc.getPoint())) {
                 this.seletionGroup.add(nc);
             }
         }
         for (EdgeControl ec : EC) {
-            if(r.contains(ec.getA().getPoint())||r.contains(ec.getB().getPoint())){
+            if (r.contains(ec.getA().getPoint()) || r.contains(ec.getB().getPoint())) {
                 this.seletionGroup.add(ec);
             }
         }
-        
+
     }
-    
+
+    public void atualizaPoints() {
+        for (NodeControl nodeControl : NC) {
+            nodeControl.atualizaPoint();
+        }
+    }
+
+    public NodeControl getSelectedNode() {
+        NodeControl nc = null;
+        if (this.selected.getClass() == NodeControl.class) {
+            nc = (NodeControl) this.selected;
+        }
+        return nc;
+    }
+
     public mode getMode() {
         return mode;
     }
@@ -244,8 +258,8 @@ public class GraphControl {
                 break;
             case sel:
 //                System.out.println("Case sel");
-                
-                if(!S){
+
+                if (!S) {
                     this.seletionGroup.clear();
                 }
                 this.selected = N;
