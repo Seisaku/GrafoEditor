@@ -339,6 +339,10 @@ public class GraphControl {
         return null;
     }
 
+    public void clearGroupSel() {
+        this.seletionGroup.clear();
+    }
+
     private void removeNodeControl(NodeControl N) {
         Node node = N.getNode();
         ArrayList<Edge> ER = node.getEdges();
